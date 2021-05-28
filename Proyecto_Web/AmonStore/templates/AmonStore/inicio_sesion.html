@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesion</title>
+
+    <!--Boostrap4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--FontLato(Fuente productos)-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!--Importe de los estilos(css)-->
+    <link type="text/css" rel="stylesheet" href="{% static 'AmonStore/Css/estilos.css' %}">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#error_is").hide(); //ocultando el div de los errores
+
+            //Indicar que las validaciones del formulario se ejecutaran solo cuando se
+            //presione el submit
+            $("#inicio_sesion").submit(function () {
+                var mensaje = "Por favor revisar los siguientes detalles en el formulario: ";
+
+                if ($("#email").val().trim().length == 0) {
+                    mensaje = mensaje + "<br>El correo electrónico no debe estar vacío";
+                }
+                if ($("#contrasenia").val().trim().length == 0) {
+                    mensaje = mensaje + "<br>La contraseña no debe estar vacía";
+                }
+                if (mensaje != "Por favor revisar los siguientes detalles en el formulario: ") {
+                    $("#error_is").html(mensaje); //mostrando el texto de la variable en el div del html
+                    $("#error_is").show(); //hace visible el div
+                    event.preventDefault(); //evita que los datos del formulario se envie
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!--Inicio Barra Menu-->
+    <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0; margin-bottom: 5%;">
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+        <!--Opciones-->
+        <div class="collapse navbar-collapse" id="navb">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Home' %}">Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--Fin Barra Menu-->
+
+    <div class="container texto_is" style="text-align: center;">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6 texto_is" style="background-color: white; border: black solid 1px;">
+                <!--Icono de Inicio de Sesion-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor"
+                    class="bi bi-person-circle " viewBox="0 0 16 16" style="margin-top: 5%; margin-bottom: 2%;">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+                <!--Texto-->
+                <p class="texto_is" style="margin-bottom: 30px;">Inicia sesión para poder realizar compras, obtener ofertas y participar de futuros
+                    sorteos que realice la página</p>
+                <form action="#" method="POST" name="inicio_sesion" id="inicio_sesion">
+                    <!--Ingresar Correo Electronico-->
+                    <div class="form-group">
+                        <input type="email" class="form-control borde_input" id="email"
+                            placeholder="Correo electrónico"  style="margin-bottom: 30px;">
+                    </div>
+                    <!--Ingresar Contraseña-->
+                    <div class="form-group">
+                        <input type="password" class="form-control borde_input" id="contrasenia"
+                            placeholder="Contraseña"  style="margin-bottom: 30px;">
+                    </div>
+                    <!--Separar recuerdame y ¿olvidaste contraseña?-->
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div class="col-md-6 col-sm-12" style="padding-left: 30px; text-align: left;">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Recuerdame</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12" style="text-align: right;">
+                            <a href="{% url 'Olvidaste_clave' %}" class="texto_is" style="margin-bottom: 10px;">¿Olvidaste tu
+                                Contraseña?</a>
+                        </div>
+                    </div>
+                    <!--Boton Inicio Sesion-->
+                    <div class="form-group">
+                        <div id="error_is" class="alert alert-danger" style="text-align: left;"></div>
+                        <p><button type="submit" class="boton_is" style="margin-top: 30px;">Iniciar Sesión</button></p>
+                    </div>
+                    <div class="form-group">
+                        <p class="texto_is">———————————————— O ————————————————</p>
+                        <a href="{% url 'Registrarse' %}" class="texto_is " style="font-style: oblique;"> Crear Cuenta
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                            </svg>
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

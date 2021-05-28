@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poleras</title>
+    <!--Boostrap4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--FontLato(Fuente productos)-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!--Importe de los estilos(css)-->
+    <link type="text/css" rel="stylesheet" href="{% static 'AmonStore/Css/estilos.css' %}">
+    <!--Importe de los iconos para las redes sociales-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <!--Inicio Barra Menu-->
+    <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0;">
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+        <!--Opciones-->
+        <div class="collapse navbar-collapse" id="navb">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Home' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Quienes_somos' %}">¿Quiénes somos?</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop" data-toggle="dropdown">
+                        Poleras
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Pantalones' %}">Pantalones</a>
+                        <a class="dropdown-item" href="{% url 'Polerones' %}">Polerones</a>
+                    </div>
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos' %}">Contáctanos</a>
+                </li>
+                </li>
+            </ul>
+            <!--Registrarse / Iniciar Sesion-->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="separacion_reg_ini ">
+                    <a href="{% url 'Registrarse' %}" class="color_letra2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg>
+                        Registrarse
+                    </a>
+                </li>
+                <li class="separacion_reg_ini bottom_ini">
+                    <a href="{% url 'Inicio_sesion' %}" class="color_letra2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                            <path fill-rule="evenodd"
+                                d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                        </svg>
+                        Iniciar Sesión
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--Fin Barra Menu-->
+
+    <!--Buscar-->
+    <form action="poleras.html" method="POST" name="buscar_polera" id="buscar_polera">
+        <div class="container">
+            <div class="row">
+                <input class="form-control mr-sm-2 buscar" type="text" placeholder="Ingresar Producto"
+                    style="margin-top: 1rem; margin-bottom: 1rem;" required>
+                <button class="btn btn-primary"
+                    style="border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
+                    type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+
+    <!--Poleras-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 espacio_prod">
+                <div class="card">
+                    <div class="card">
+                        <img src="{% static 'AmonStore/imagenes/polera jordan.jpg' %}" id="polera1" alt="Polera 1" style="width:100%"
+                            height="215">
+                        <h1>Polera</h1>
+                        <h1>Jordan</h1>
+                        <p class="price">$7.500</p>
+                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
+                        <p><button>Añadir al carrito</button></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 espacio_prod">
+                <div class="card">
+                    <div class="card">
+                        <img src="{% static 'AmonStore/imagenes/polera tommy.jpg' %}" id="polera2" alt="Polera 2" style="width:100%" 
+                            height="215">
+                        <h1>Polera</h1>
+                        <h1>Tommy Hilfiger</h1>
+                        <p class="price">$7.500</p>
+                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
+                        <p><button>Añadir al carrito</button></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 espacio_prod">
+                <div class="card">
+                    <div class="card">
+                        <img src="{% static 'AmonStore/imagenes/polera3.jpg' %}" id="polera3" alt="Polera 3" style="width:100%">
+                        <h1>Polera</h1>
+                        <h1>Jordan</h1>
+                        <p class="price">$7.500</p>
+                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
+                        <p><button>Añadir al carrito</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 espacio_prod">
+                <div class="card">
+                    <div class="card">
+                        <img src="{% static 'AmonStore/imagenes/polera1.jpg' %}" id="polera1" alt="Polera 1" style="width:100%">
+                        <h1>Polera</h1>
+                        <h1>Jordan</h1>
+                        <p class="price">$7.500</p>
+                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
+                        <p><button>Añadir al carrito</button></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 espacio_prod">
+                <div class="card">
+                    <div class="card">
+                        <img src="{% static 'AmonStore/imagenes/polera2.jpg' %}" id="polera2" alt="Polera 2" style="width:100%">
+                        <h1>Polera</h1>
+                        <h1>Tommy Hilfiger</h1>
+                        <p class="price">$7.500</p>
+                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
+                        <p><button>Añadir al carrito</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin Poleras-->
+
+    <!--Inicio Pie de Página-->
+    <footer class="bg-light text-center text-lg-start" style="margin-top: 50px;">
+        <div class="container-fluid p-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">Horarios de Atención</h5>
+
+                    <ul class="list-unstyled mb-0" style="line-height: 1;">
+                        <li>
+                            <p class="text-dark">Lunes: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Martes: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Miércoles: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Jueves: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Viernes: 10:00 a 20:00</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="text-uppercase mb-0" style="padding-bottom: 10px;">Redes Sociales</h5>
+
+                    <ul class="list-unstyled lados_pie_pag">
+                        <p>
+                            <a href="https://www.instagram.com/amon.store._/?hl=es" class="fa fa-instagram"></a>
+                            <a href="#" class="fa fa-facebook"></a>
+                        </p>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">Contáctanos</h5>
+
+                    <ul class="list-unstyled mb-0" style="line-height: 1;">
+                        <li>
+                            <p>Telefono: +56 9 4998 3478</p>
+                        </li>
+                        <li>
+                            <p>Correo Electrónico: a.gonzalez3@duocuc.cl</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Fin Pie de Página-->
+</body>
+
+</html>

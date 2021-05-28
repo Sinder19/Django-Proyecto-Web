@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olvidaste tu Contraseña</title>
+    <!--Boostrap4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--FontLato(Fuente productos)-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!--Importe de los estilos(css)-->
+    <link type="text/css" rel="stylesheet" href="{% static 'AmonStore/Css/estilos.css' %}">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#error_oc").hide(); //ocultando el div de los errores
+
+            //Indicar que las validaciones del formulario se ejecutaran solo cuando se
+            //presione el submit
+            $("#olvidar_clave").submit(function () {
+                var mensaje = "Por favor revisar los siguientes detalles en el formulario: ";
+
+                if ($("#email").val().trim().length == 0) {
+                    mensaje = mensaje + "<br>El correo electrónico no debe estar vacío";
+                }
+                if (mensaje != "Por favor revisar los siguientes detalles en el formulario: ") {
+                    $("#error_oc").html(mensaje); //mostrando el texto de la variable en el div del html
+                    $("#error_oc").show(); //hace visible el div
+                    event.preventDefault(); //evita que los datos del formulario se envie
+                }
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    
+    <!--Fin Barra Menu-->
+    <br> <br>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 texto_is" style="background-color: white; border: black solid 1px;">
+            <form action="#" method="POST" name="olvidar_clave" id="olvidar_clave">
+                <h5 style="margin-top: 30px; margin-bottom: 30px; font-weight: bold; text-align: center;">¿Olvidaste tu
+                    Contraseña?</h5>
+                <div class="form-group">
+                    <p style="margin-bottom: 0; font-style: oblique; text-align: center;">Ingrese su correo electrónico
+                    </p>
+                    <p style="font-style: oblique; text-align: center;">Recibirá las instrucciones para restablecer su
+                        contraseña</p>
+                </div>
+                <div class="form-group">
+                    <label for="email" style="font-weight: 600; margin-top: 40px;">Correo Electrónico</label>
+                    <input type="email" class="form-control borde_input" id="email" name="email"
+                        placeholder="alguien@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <div id="error_oc" class="alert alert-danger"></div>
+                </div>
+                <div class="form-group" style="text-align: center;">
+                    <p><button type="submit" class="boton_is" style="margin-top: 100px;">Restablacer Contraseña</button>
+                    </p>
+                    <a href="{% url 'Home' %}" style="font-size: 13px;  color:black;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="text-align: center;" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                        </svg>
+                        Volver al inicio
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</body>
+
+</html>

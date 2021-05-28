@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <!--Boostrap4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--FontLato(Fuente productos)-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!--Importe de los estilos(css)-->
+    <link type="text/css" rel="stylesheet" href="{% static 'AmonStore/Css/estilos.css' %}">
+    <!--Importe de los iconos para las redes sociales-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!--Inicio Barra Menu-->
+    <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0;">
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+        <!--Opciones-->
+        <div class="collapse navbar-collapse" id="navb">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Home' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Quienes_somos' %}">¿Quiénes somos?</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
+                        Productos
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Polerones' %}">Polerones</a>
+                        <a class="dropdown-item" href="{% url 'Poleras' %}">Poleras</a>
+                        <a class="dropdown-item" href="{% url 'Pantalones' %}">Pantalones</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos' %}">Contáctanos</a>
+                </li>
+            </ul>
+            <!--Registrarse / Iniciar Sesion-->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle item_select" style="margin-right: 60px" href="#" id="navbardrop"
+                        data-toggle="dropdown">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-cart3" viewBox="0 0 16 16">
+                            <path
+                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg> Carrito de Compras
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item color_letra" href="{% url 'Home' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+                                <path fill-rule="evenodd"
+                                    d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                            </svg> Cerrar Sesión
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--Fin Barra Menu-->
+
+    <div class="container fondo_carrito">
+        <div class="row" style="margin-top: 30px; border-bottom: 1px solid #dee2e6;">
+            <div class="col-md-12">
+                <h2 style="margin-top: 10px;">Carrito de Compras</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="width: 170px;">Imagen</th>
+                            <th>Nombre Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt="" style="width: 100%; max-width: 150px;"></td>
+                            <td>Poleron Calvin Klein</td>
+                            <td>3</td>
+                            <td>$14.000</td>
+                            <td>$42.000</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><img src="{% static 'AmonStore/Imagenes/polera1.jpg' %}" alt=""  style="width: 100%; max-width: 150px;"></td>
+                            <td>Poleron Jordan</td>
+                            <td>4</td>
+                            <td>$7.500</td>
+                            <td>$30.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 fondo_carrito">
+                <div class="row">
+                    <div class="col-md-12" style="border-bottom: #B1B4B7 solid 2px; margin-top: 10px;">
+                        <h3>Detalle del Pago</h3>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-6" style="border-right: #B1B4B7 solid 2px;">
+                        <h4>Subtotal</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>$60.504</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="border-right: #B1B4B7 solid 2px;">
+                        <h4>Iva</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>$11.496</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="border-right: #B1B4B7 solid 2px;">
+                        <h4>Total a Pagar</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>$72.000</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><button class="pagar">Pagar</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Inicio Pie de Página-->
+    <footer class="bg-light text-center text-lg-start" style="margin-top: 50px;">
+        <div class="container-fluid p-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">Horarios de Atención</h5>
+
+                    <ul class="list-unstyled mb-0" style="line-height: 1;">
+                        <li>
+                            <p class="text-dark">Lunes: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Martes: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Miércoles: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Jueves: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Viernes: 10:00 a 20:00</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="text-uppercase mb-0" style="padding-bottom: 10px;">Redes Sociales</h5>
+
+                    <ul class="list-unstyled lados_pie_pag">
+                        <p>
+                            <a href="https://www.instagram.com/amon.store._/?hl=es" class="fa fa-instagram"></a>
+                            <a href="#" class="fa fa-facebook"></a>
+                        </p>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">Contáctanos</h5>
+
+                    <ul class="list-unstyled mb-0" style="line-height: 1;">
+                        <li>
+                            <p>Telefono: +56 9 4998 3478</p>
+                        </li>
+                        <li>
+                            <p>Correo Electrónico: a.gonzalez3@duocuc.cl</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Fin Pie de Página-->
+</body>
+
+</html>

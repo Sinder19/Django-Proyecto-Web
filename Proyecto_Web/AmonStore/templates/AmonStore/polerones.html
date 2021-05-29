@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +25,8 @@
 <body>
     <!--Inicio Barra Menu-->
     <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0;">
-        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}"
+                alt="Logo" width="50px"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
                 viewBox="0 0 16 16">
@@ -37,7 +39,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link color_letra padding_navbar" href="{% url 'Home' %}">Inicio</a>
-                </li> 
+                </li>
                 <li class="nav-item">
                     <a class="nav-link color_letra padding_navbar" href="{% url 'Quienes_somos' %}">¿Quiénes somos?</a>
                 </li>
@@ -90,7 +92,7 @@
         <div class="container">
             <div class="row">
                 <input class="form-control mr-sm-2 buscar" type="text" placeholder="Ingresar Producto"
-                    style="margin-top: 1rem; margin-bottom: 1rem;"required>
+                    style="margin-top: 1rem; margin-bottom: 1rem;" required>
                 <button class="btn btn-primary"
                     style="border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
                     type="submit">Buscar</button>
@@ -104,15 +106,7 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <div class="texto_producto">
-                            <a href="{% url 'Detalle_producto' %}">
-                                <img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt="Poleron 1" class="producto"
-                                    style="max-width: 397px !important;">
-                                <div class="overlay">
-                                    <div class="texto">Ver Más</div>
-                                </div>
-                            </a>
-                        </div>
+                        <img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt="Poleron 1" style="width: 100%;">
                         <h1>Poleron</h1>
                         <h1>Calvin Klein</h1>
                         <p class="price">$14.000</p>
@@ -131,16 +125,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4" style="text-align: center;">
-                                            <img src="Imagenes/poleron1.jpg" alt="Poleron 1"
+                                            <img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}"" alt=" Poleron 1"
                                                 style="margin-top: 10px; width: 100%; max-width: 300px;">
                                         </div>
                                         <div class="col-md-8">
                                             <div class="row"
                                                 style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <h4>Precio</h4>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-8">
                                                     $<input type="number" readonly value="14000"
                                                         style="border: 0; color: #555657; margin-top: 2px; font-size: 18px; width: 70px;">
                                                 </div>
@@ -194,7 +188,8 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/poleron2.jpg' %}" id="poleron2" alt="Poleron 2" style="width:100%">
+                        <img src="{% static 'AmonStore/imagenes/poleron2.jpg' %}" id="poleron2" alt="Poleron 2"
+                            style="width:100%">
                         <h1>Poleron</h1>
                         <h1>GAP</h1>
                         <p class="price">$14.000</p>
@@ -206,7 +201,8 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/poleron3.jpg' %}" id="poleron3" alt="Poleron 3" style="width:100%">
+                        <img src="{% static 'AmonStore/imagenes/poleron3.jpg' %}" id="poleron3" alt="Poleron 3"
+                            style="width:100%">
                         <h1>Poleron</h1>
                         <h1>Guess</h1>
                         <p class="price">$12.000</p>
@@ -220,7 +216,8 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/poleron4.jpg' %}" id="poleron4" alt="Poleron 4" style="width:100%">
+                        <img src="{% static 'AmonStore/imagenes/poleron4.jpg' %}" id="poleron4" alt="Poleron 4"
+                            style="width:100%">
                         <h1>Poleron</h1>
                         <h1>Tommy Hilfiger</h1>
                         <p class="price">$12.000</p>
@@ -232,7 +229,8 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/poleron5.jpg' %}" id="poleron5" alt="Poleron 5" style="width:100%">
+                        <img src="{% static 'AmonStore/imagenes/poleron5.jpg' %}" id="poleron5" alt="Poleron 5"
+                            style="width:100%">
                         <h1>Poleron Armani</h1>
                         <h1>Exchange</h1>
                         <p class="price">$14.000</p>
@@ -244,7 +242,8 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/poleron6.jpg' %}" id="poleron6" alt="Poleron 6" style="width:100%">
+                        <img src="{% static 'AmonStore/imagenes/poleron6.jpg' %}" id="poleron6" alt="Poleron 6"
+                            style="width:100%">
                         <h1>Poleron</h1>
                         <h1>Tommy Hilfiger</h1>
                         <p class="price">$12.000</p>
@@ -258,7 +257,8 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/poleron7.jpg' %}" id="poleron7" alt="Poleron 7" style="width:100%">
+                        <img src="{% static 'AmonStore/imagenes/poleron7.jpg' %}" id="poleron7" alt="Poleron 7"
+                            style="width:100%">
                         <h1>Poleron</h1>
                         <h1>GAP</h1>
                         <p class="price">$14.000</p>
@@ -270,7 +270,8 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/poleron8.jpg' %}" id="poleron8" alt="Poleron 8" style="width:100%">
+                        <img src="{% static 'AmonStore/imagenes/poleron8.jpg' %}" id="poleron8" alt="Poleron 8"
+                            style="width:100%">
                         <h1>Poleron</h1>
                         <h1>Guess</h1>
                         <p class="price">$12.000</p>
@@ -282,7 +283,8 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/poleron9.jpg' %}" id="poleron9" alt="Poleron 9" style="width:100%">
+                        <img src="{% static 'AmonStore/imagenes/poleron9.jpg' %}" id="poleron9" alt="Poleron 9"
+                            style="width:100%">
                         <h1>Poleron</h1>
                         <h1>GAP</h1>
                         <p class="price">$14.000</p>

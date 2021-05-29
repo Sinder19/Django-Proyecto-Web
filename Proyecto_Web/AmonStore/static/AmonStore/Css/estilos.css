@@ -188,38 +188,6 @@ iframe{
     position: relative;
     width: 50%;
 }
-.producto {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-.overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: #4F4F4F;
-}
-.texto_producto:hover .overlay {
-    opacity: 0.8;
-}
-.texto {
-    color: white;
-    font-size: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-  
 
 /*Estilos Contactanos*/
 .espaciado_superior{
@@ -231,16 +199,6 @@ iframe{
 }
 
 /*DETALLE PRODUCTO ESTILOS*/
-.img_detalle{
-    width: 100%;
-    max-width: 300px;
-    transition: transform .2s;
-}
-.img_detalle:hover {
-    -ms-transform: scale(2);
-    -webkit-transform: scale(2);
-    transform: scale(2);
-}
 .texto_detalle{
     font-family: 'Lato', sans-serif;
 }
@@ -261,22 +219,6 @@ iframe{
 @media only screen and (max-width: 767px){
     .titulo_det_centro{
         text-align: center;
-    }
-}
-@media only screen and (min-width: 767px) and (max-width: 991px) {
-    .img_detalle{
-        width: 100%;
-        max-width: 300px;
-        transition: transform .2s;
-        margin-top: 70px !important;
-    }
-}
-@media only screen and (min-width: 992px){
-    .img_detalle{
-        width: 100%;
-        max-width: 300px;
-        transition: transform .2s;
-        margin-top: 45px !important;
     }
 }
 

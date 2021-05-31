@@ -75,7 +75,7 @@ class Producto(models.Model):
     stockProd = models.IntegerField(verbose_name= "Stock del Producto", blank=False, null=False)
     tipoproducto = models.ForeignKey(TipoProducto, on_delete=CASCADE)
     tallaProd = models.CharField(max_length=3, verbose_name="Talla del Producto", blank=False, null=False)
-    colorProd = models.CharField(max_length=10, verbose_name="Talla del Producto", blank=False, null=False)
+    colorProd = models.CharField(max_length=10, verbose_name="Color del Producto", blank=False, null=False)
 
     def __str__(self) -> str:
         return self.nombreProd

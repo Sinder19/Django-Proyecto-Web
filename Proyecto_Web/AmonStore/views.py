@@ -1,4 +1,7 @@
+from typing import ContextManager
+from django.db import models
 from django.shortcuts import render, resolve_url
+from .models import Producto, TipoProducto
 
 # Create your views here.
 def Home(request):
@@ -8,7 +11,9 @@ def Quienes_somos(request):
     return render(request, 'AmonStore/Quienes_somos.html')
 
 def Polerones(request):
-    return render(request, 'AmonStore/polerones.html')
+    polerones = Producto.objects.filter(tipoproducto = 2)
+    contexto = {"producto":polerones}
+    return render(request, 'AmonStore/polerones.html', contexto)
 
 def Poleras(request):
     return render(request, 'AmonStore/poleras.html')

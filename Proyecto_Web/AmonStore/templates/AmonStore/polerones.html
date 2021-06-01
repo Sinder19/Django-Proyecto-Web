@@ -107,7 +107,7 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt="Poleron" style="width: 100%;">
+                        <img src="{% static 'AmonStore/Imagenes/{{ p.fotoProd }}' %}" alt="{{ p.fotoProd }}" style="width: 100%;">
                         <h1>Polerón</h1>
                         <h1>{{ p.nombreProd }}</h1>
                         <p class="price">{{ p.precioProd }}</p>
@@ -120,13 +120,13 @@
                                     <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
                                         <div class="col-md-12">
                                             <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro">
-                                                {{ p.nombreProd }}
+                                                Polerón {{ p.nombreProd }}
                                             </h1>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4" style="text-align: center;">
-                                            <img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt=" Poleron 1"
+                                            <img src="{% static 'AmonStore/Imagenes/{{ p.fotoProd }}' %}" alt="{{p.fotoProd}}"
                                                 style="margin-top: 10px; width: 100%; max-width: 300px;">
                                         </div>
                                         <div class="col-md-8">

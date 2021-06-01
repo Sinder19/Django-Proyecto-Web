@@ -1,7 +1,7 @@
-from typing import ContextManager
+from django.contrib import messages
 from django.db import models
-from django.shortcuts import render, resolve_url
-from .models import Producto, TipoProducto
+from django.shortcuts import render, redirect
+from .models import Direccion, Producto, Comuna, Region, TipoUsuario, Usuario
 
 # Create your views here.
 def Home(request):
@@ -25,7 +25,42 @@ def Contactanos(request):
     return render(request, 'AmonStore/contactanos.html')
 
 def Registrarse(request):
-    return render(request, 'AmonStore/Registrarse.html')
+    regiones = Region.objects.all()
+    comunas = Comuna.objects.all()
+    contexto = {"region":regiones, "comuna":comunas}
+    return render(request, 'AmonStore/Registrarse.html', contexto)
+
+def Ingresar_usuario(request):
+    rut = request.POST['rut']
+    nombre = request.POST['nombre']
+    apellido = request.POST['apellido']
+    correo = request.POST['email']
+    contrasenia = request.POST['contrasenia2']
+    telefono = request.POST['telefono']
+    comunaUsu = request.POST['comunas']
+    direccion = request.POST['direccion']
+    num_direc = request.POST['direccion_num']
+    block = request.POST['block']
+    num_dpto = request.POST['num_depto']
+    desp_dic = request.POST['desp_dic']
+ 
+    com = Comuna.objects.get(idComuna = comunaUsu)
+    tipoUsu = TipoUsuario.objects.get(idTipoUsu = 2)
+    usu = Usuario.objects.get(rutUsu = rut)
+
+    opcionDespacho = 0
+    if (desp_dic == 'Sí'):
+        opcionDespacho = 1
+        return opcionDespacho
+    elif (desp_dic == 'No'):
+        opcionDespacho = 2
+        return opcionDespacho
+
+    Usuario.objects.create(rutUsu = rut, nombreUsu = nombre, apellidoUsu = apellido, correoUsu = correo, contrasenaUsu = contrasenia, telefonoUsu = telefono, tipousuario = tipoUsu)
+    Direccion.objects.create(descripcion = direccion, numDic =num_direc, blockDpto = block, numDpto = num_dpto, direccionDespacho = opcionDespacho, comuna = com, usuario = usu)
+
+    messages.success(request, 'El Usuario Ha Sido Registrado Con Exito')
+    return redirect('Registrarse')
 
 def Inicio_sesion(request):
     return render(request, 'AmonStore/inicio_sesion.html')

@@ -43,7 +43,7 @@ class Direccion(models.Model):
     numDic = models.IntegerField(verbose_name="Número de la Dirección")
     blockDpto = models.CharField(max_length=5, verbose_name="Bloque del Departamento")
     numDpto = models.CharField(max_length=5, verbose_name="Número del Departamento")
-    direccionDespacho = models.IntegerField(verbose_name="Corresponde a Direccion de Desspacho", blank=False, null=False)
+    direccionDespacho = models.IntegerField(verbose_name="Corresponde a Direccion de Despacho", blank=False, null=False)
     comuna = models.ForeignKey(Comuna, on_delete=CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=CASCADE)
 

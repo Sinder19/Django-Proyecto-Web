@@ -1,7 +1,8 @@
+from typing import ContextManager
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import render, redirect
-from .models import Direccion, Producto, Comuna, Region, TipoUsuario, Usuario
+from .models import Direccion, Producto, Comuna, Region, TipoUsuario, Usuario, Contactanos
 
 # Create your views here.
 def Home(request):
@@ -12,28 +13,56 @@ def Quienes_somos(request):
 
 def Polerones(request):
     polerones = Producto.objects.filter(tipoproducto = 1)
-    contexto = {"producto":polerones}
+    contexto = {"producto": polerones}
+    return render(request, 'AmonStore/polerones.html', contexto)
+
+def Buscar_polerones(request):
+    buscar = request.POST['buscar']
+    polerones = Producto.objects.filter(tipoproducto = 1, nombreProd__icontains = buscar)
+    contexto = {"producto": polerones}
     return render(request, 'AmonStore/polerones.html', contexto)
 
 def Poleras(request):
     poleras = Producto.objects.filter(tipoproducto = 2)
-    contexto = {"producto":poleras}
+    contexto = {"producto": poleras}
+    return render(request, 'AmonStore/poleras.html', contexto)
+
+def Buscar_poleras(request):
+    buscar = request.POST['buscar']
+    polerones = Producto.objects.filter(tipoproducto = 2, nombreProd__icontains = buscar)
+    contexto = {"producto": polerones}
     return render(request, 'AmonStore/poleras.html', contexto)
 
 def Pantalones(request):
     pantalones = Producto.objects.filter(tipoproducto = 3)
-    contexto = {"producto":pantalones}
+    contexto = {"producto": pantalones}
     return render(request, 'AmonStore/Pantalones.html', contexto)
 
-def Contactanos(request):
+def Buscar_pantalones(request):
+    buscar = request.POST['buscar']
+    polerones = Producto.objects.filter(tipoproducto = 3, nombreProd__icontains = buscar)
+    contexto = {"producto": polerones}
+    return render(request, 'AmonStore/Pantalones.html', contexto) 
+
+def Contactanos_mensaje(request):
     return render(request, 'AmonStore/contactanos.html')
+
+def Enviar_contactanos(request):
+    nombre = request.POST['nombre_completo']
+    correo = request.POST['correo']
+    asunto = request.POST['asunto']
+    comentario = request.POST['comentario']
+
+    Contactanos.objects.create(nombre = nombre, correo = correo, asunto = asunto, comentario = comentario, visto = 2)
+    messages.success(request, 'El mensaje ha sido enviado con exito')
+    return redirect('Contactanos_mensaje')
 
 def Registrarse(request):
     regiones = Region.objects.all()
     comunas = Comuna.objects.all()
     contexto = {
-        "region":regiones, 
-        "comuna":comunas
+        "region" : regiones, 
+        "comuna" : comunas
     }
     return render(request, 'AmonStore/Registrarse.html', contexto)
 
@@ -53,17 +82,15 @@ def Ingresar_usuario(request):
  
     com = Comuna.objects.get(idComuna = comunaUsu)
     tipoUsu = TipoUsuario.objects.get(idTipoUsu = 2)
-    usu = Usuario.objects.get(rutUsu = rut)
-
-    opcionDespacho = 0
-    if (desp_dic == 'Sí'):
+    
+    if (desp_dic == 'si'):
         opcionDespacho = 1
-        return opcionDespacho
-    elif (desp_dic == 'No'):
+    elif (desp_dic == 'no'):
         opcionDespacho = 2
-        return opcionDespacho
-
+    
     Usuario.objects.create(rutUsu = rut, nombreUsu = nombre, apellidoUsu = apellido, correoUsu = correo, contrasenaUsu = contrasenia, telefonoUsu = telefono, tipousuario = tipoUsu)
+    
+    usu = Usuario.objects.get(rutUsu = rut)
     Direccion.objects.create(descripcion = direccion, numDic =num_direc, blockDpto = block, numDpto = num_dpto, direccionDespacho = opcionDespacho, comuna = com, usuario = usu)
 
     messages.success(request, 'El Usuario Ha Sido Registrado Con Exito')

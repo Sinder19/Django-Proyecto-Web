@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +47,8 @@
 <body>
     <!--Inicio Barra Menu-->
     <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0; margin-bottom: 5%;">
-        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}"
+                alt="Logo" width="50px"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
                 viewBox="0 0 16 16">
@@ -78,18 +80,19 @@
                         d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                 </svg>
                 <!--Texto-->
-                <p class="texto_is" style="margin-bottom: 30px;">Inicia sesión para poder realizar compras, obtener ofertas y participar de futuros
+                <p class="texto_is" style="margin-bottom: 30px;">Inicia sesión para poder realizar compras, obtener
+                    ofertas y participar de futuros
                     sorteos que realice la página</p>
                 <form action="#" method="POST" name="inicio_sesion" id="inicio_sesion">
                     <!--Ingresar Correo Electronico-->
                     <div class="form-group">
-                        <input type="email" class="form-control borde_input" id="email"
-                            placeholder="Correo electrónico"  style="margin-bottom: 30px;">
+                        <input type="email" class="form-control borde_input" id="email" name="email"
+                            placeholder="Correo electrónico" style="margin-bottom: 30px;">
                     </div>
                     <!--Ingresar Contraseña-->
                     <div class="form-group">
-                        <input type="password" class="form-control borde_input" id="contrasenia"
-                            placeholder="Contraseña"  style="margin-bottom: 30px;">
+                        <input type="password" class="form-control borde_input" id="contrasenia" name="contrasenia"
+                            placeholder="Contraseña" style="margin-bottom: 30px;">
                     </div>
                     <!--Separar recuerdame y ¿olvidaste contraseña?-->
                     <div class="row" style="padding-bottom: 10px;">
@@ -100,7 +103,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12" style="text-align: right;">
-                            <a href="{% url 'Olvidaste_clave' %}" class="texto_is" style="margin-bottom: 10px;">¿Olvidaste tu
+                            <a href="{% url 'Olvidaste_clave' %}" class="texto_is"
+                                style="margin-bottom: 10px;">¿Olvidaste tu
                                 Contraseña?</a>
                         </div>
                     </div>

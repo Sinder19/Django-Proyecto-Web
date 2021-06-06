@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos, Registrarse,Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Detalle_producto, Carrito
+from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse,Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Detalle_producto, Carrito, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos
 
 urlpatterns = [
     path('', Home, name="Home"),
@@ -8,11 +8,15 @@ urlpatterns = [
     path('Polerones', Polerones, name="Polerones"),
     path('Poleras', Poleras, name="Poleras"),
     path('Pantalones', Pantalones, name="Pantalones"),
-    path('Contactanos', Contactanos, name="Contactanos"),
+    path('Contactanos_mensaje', Contactanos_mensaje, name="Contactanos_mensaje"),
+    path('Enviar_contactanos', Enviar_contactanos, name="Enviar_contactanos"),
     path('Registrarse', Registrarse, name="Registrarse"),
     path('Ingresar_usuario', Ingresar_usuario, name="Ingresar_usuario"),
     path('Inicio_sesion', Inicio_sesion, name="Inicio_sesion"),
     path('Olvidaste_clave', Olvidaste_clave, name="Olvidaste_clave"),
     path('Detalle_producto', Detalle_producto, name="Detalle_producto"),
     path('Carrito', Carrito, name="Carrito"),
+    path('Buscar_polerones', Buscar_polerones, name="Buscar_polerones"),
+    path('Buscar_poleras', Buscar_poleras, name="Buscar_poleras"),
+    path('Buscar_pantalones', Buscar_pantalones, name="Buscar_pantalones"),
 ]

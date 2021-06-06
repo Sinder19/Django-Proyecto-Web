@@ -53,7 +53,7 @@
                         <a class="dropdown-item" href="{% url 'Polerones' %}">Polerones</a>
                     </div>
                 <li class="nav-item">
-                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos' %}">Contáctanos</a>
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
                 </li>
             </ul>
@@ -88,14 +88,18 @@
     <!--Fin Barra Menu-->
 
     <!--Buscar-->
-    <form action="poleras.html" method="POST" name="buscar_polera" id="buscar_polera">
+    <form action="{% url 'Buscar_poleras' %}" method="POST" name="buscar_polera" id="buscar_polera">
+        {% csrf_token %}
         <div class="container">
             <div class="row">
-                <input class="form-control mr-sm-2 buscar" type="text" placeholder="Ingresar Producto"
+                <input class="form-control mr-sm-2 buscar" name="buscar" type="text" placeholder="Ingresar Producto"
                     style="margin-top: 1rem; margin-bottom: 1rem;" required>
                 <button class="btn btn-primary"
-                    style="border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
+                    style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
                     type="submit">Buscar</button>
+                <a href="{% url 'Poleras' %}"><button class="btn btn-primary"
+                    style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
+                    type="button">Borrar Filtro</button></a>
             </div>
         </div>
     </form>

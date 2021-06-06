@@ -144,7 +144,7 @@
                 {% if messages %}
                 <div>
                     {% for i in messages %}
-                    <p style="color: red;">{{ i }}</p>
+                    <p style="color: green; text-align: center;">{{ i }}</p>
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -233,7 +233,7 @@
 
                             <div class="form-group">
                                 <label for="">Seleccione su Comuna</label>
-                                <select id="comunas" class="form-control" style="border: black solid 1px;">
+                                <select id="comunas" name="comunas" class="form-control" style="border: black solid 1px;">
                                     <option value="0">Seleccione una Comuna</option>
                                     {% for c in comuna %}
                                     <option value="{{ c.idComuna }}">{{ c.nombreComuna }}</option>

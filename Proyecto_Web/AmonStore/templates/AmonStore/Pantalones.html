@@ -98,51 +98,94 @@
         </div>
     </form>
 
-    <!--Polerones-->
+    <!--Pantalones-->
     <div class="container">
-        <div class="row espacio_prod">
+        <div class="row">
+            {% for p in producto%}
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/pantalon 1.jpg' %}" id="poleron1" alt="Poleron 1" style="width:100%"
-                            class="ajuste_fotos">
-                        <h1>Pantalon</h1>
-                        <h1>Jordan</h1>
-                        <p class="price">$20.000</p>
-                        <p>Pantalon Top Quality con estampado a serigrafia y tela prelavada</p>
-                        <p><button>Añadir al carrito</button></p>
+                        <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="width: 100%;">
+                        <h1>Pantalón</h1>
+                        <h1>{{ p.nombreProd }}</h1>
+                        <p class="price">{{ p.precioProd }}</p>
+                        <p>{{ p.descripcionProd }}</p>
+                        <p><button onclick="document.getElementById('agregar_carrito').style.display='block'">Añadir al
+                                carrito</button></p>
+                        <div id="agregar_carrito" class="modal" style="text-align: left;">
+                            <form class="modal-content animate" action="/action_page.php" method="post">
+                                <div class="container hola">
+                                    <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
+                                        <div class="col-md-12">
+                                            <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro">
+                                                Pantalón {{ p.nombreProd }}
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4" style="text-align: center;">
+                                            <img src="{% static 'AmonStore/Imagenes/{{ p.fotoProd }}' %}" alt="{{p.fotoProd}}"
+                                                style="margin-top: 10px; width: 100%; max-width: 300px;">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row"
+                                                style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                                                <div class="col-md-4">
+                                                    <h4>Precio</h4>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <p>{{ p.precioProd }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top: 10px;border-bottom: 1px solid #E1E8EE;">
+                                                <div class="col-md-12">
+                                                    <h4>Descripción</h4>
+                                                    <p>{{ p.descripcionProd }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
+                                                <div class="col-md-12">
+                                                    <h4>Cantidad</h4>
+                                                    <input type="number" value="1" class="form-control"
+                                                        style="width: 100px;">
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
+                                                <div class="col-md-12">
+                                                    <p><button class="comprar">Añadir al carrito</button></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container hola" style="background-color:#f1f1f1">
+                                    <button type="button"
+                                        onclick="document.getElementById('agregar_carrito').style.display='none'"
+                                        class="cancelbtn">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <script>
+                            // Get the modal
+                            var modal = document.getElementById('agregar_carrito');
+
+                            // When the user clicks anywhere outside of the modal, close it
+                            window.onclick = function (event) {
+                                if (event.target == modal) {
+                                    modal.style.display = "none";
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 espacio_prod">
-                <div class="card">
-                    <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/pantalon 2.jpg' %}" id="poleron2" alt="Poleron 2" style="width:100%"
-                            class="ajuste_fotos">
-                        <h1>Pantalon</h1>
-                        <h1>Jordan</h1>
-                        <p class="price">$20.000</p>
-                        <p>Pantalon Top Quality con bordado y tela prelavada</p>
-                        <p><button>Añadir al carrito</button></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 espacio_prod">
-                <div class="card">
-                    <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/pantalon 3.jpg' %}" id="poleron3" alt="Poleron 3" style="width:100%"
-                            class="ajuste_fotos">
-                        <h1>Pantalon</h1>
-                        <h1>Adidas</h1>
-                        <p class="price">$20.000</p>
-                        <p>Pantalon Top Quality con estampado a serigrafia y tela prelavada</p>
-                        <p><button>Añadir al carrito</button></p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-    <!--Fin Poleras-->
+    <!--Fin Pantalones-->
 
     <!--Inicio Pie de Página-->
     <footer class="bg-light text-center text-lg-start" style="margin-top: 50px;">

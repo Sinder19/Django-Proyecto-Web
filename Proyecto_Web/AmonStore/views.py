@@ -11,15 +11,19 @@ def Quienes_somos(request):
     return render(request, 'AmonStore/Quienes_somos.html')
 
 def Polerones(request):
-    polerones = Producto.objects.filter(tipoproducto = 2)
+    polerones = Producto.objects.filter(tipoproducto = 1)
     contexto = {"producto":polerones}
     return render(request, 'AmonStore/polerones.html', contexto)
 
 def Poleras(request):
-    return render(request, 'AmonStore/poleras.html')
+    poleras = Producto.objects.filter(tipoproducto = 2)
+    contexto = {"producto":poleras}
+    return render(request, 'AmonStore/poleras.html', contexto)
 
 def Pantalones(request):
-    return render(request, 'AmonStore/Pantalones.html')
+    pantalones = Producto.objects.filter(tipoproducto = 3)
+    contexto = {"producto":pantalones}
+    return render(request, 'AmonStore/Pantalones.html', contexto)
 
 def Contactanos(request):
     return render(request, 'AmonStore/contactanos.html')
@@ -27,7 +31,10 @@ def Contactanos(request):
 def Registrarse(request):
     regiones = Region.objects.all()
     comunas = Comuna.objects.all()
-    contexto = {"region":regiones, "comuna":comunas}
+    contexto = {
+        "region":regiones, 
+        "comuna":comunas
+    }
     return render(request, 'AmonStore/Registrarse.html', contexto)
 
 def Ingresar_usuario(request):

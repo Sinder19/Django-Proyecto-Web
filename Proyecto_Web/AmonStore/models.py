@@ -71,7 +71,7 @@ class Producto(models.Model):
     nombreProd = models.CharField(max_length=30, verbose_name="Nombre del Producto", blank=False, null=False)
     precioProd = models.IntegerField(verbose_name= "Precio del Producto", blank=False, null=False)
     descripcionProd = models.CharField(max_length=200, verbose_name="Descripcion del Producto", blank=False, null=False)
-    fotoProd = models.ImageField(verbose_name="Foto", blank=False, null=False)
+    fotoProd = models.ImageField(upload_to="productos", verbose_name="Foto", blank=False, null=False)
     stockProd = models.IntegerField(verbose_name= "Stock del Producto", blank=False, null=False)
     tipoproducto = models.ForeignKey(TipoProducto, on_delete=CASCADE)
     tallaProd = models.CharField(max_length=3, verbose_name="Talla del Producto", blank=False, null=False)

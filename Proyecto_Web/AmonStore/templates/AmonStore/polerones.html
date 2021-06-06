@@ -107,7 +107,7 @@
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/Imagenes/{{ p.fotoProd }}' %}" alt="{{ p.fotoProd }}" style="width: 100%;">
+                        <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="width: 100%;">
                         <h1>Polerón</h1>
                         <h1>{{ p.nombreProd }}</h1>
                         <p class="price">{{ p.precioProd }}</p>
@@ -187,7 +187,7 @@
             {% endfor %}
         </div>
     </div>
-    <!--Fin Poleras-->
+    <!--Fin Polerones-->
 
     <!--Inicio Pie de Página-->
     <footer class="bg-light text-center text-lg-start" style="margin-top: 50px;">

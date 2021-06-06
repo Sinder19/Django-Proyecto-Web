@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +25,8 @@
 <body>
     <!--Inicio Barra Menu-->
     <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0;">
-        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}"
+                alt="Logo" width="50px"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
                 viewBox="0 0 16 16">
@@ -42,7 +44,8 @@
                     <a class="nav-link color_letra padding_navbar" href="{% url 'Quienes_somos' %}">¿Quiénes somos?</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
                         Poleras
                     </a>
                     <div class="dropdown-menu">
@@ -100,70 +103,89 @@
     <!--Poleras-->
     <div class="container">
         <div class="row">
+            {% for p in producto%}
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/polera jordan.jpg' %}" id="polera1" alt="Polera 1" style="width:100%"
-                            height="215">
+                        <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="height: 100%; max-height: 200px;">
                         <h1>Polera</h1>
-                        <h1>Jordan</h1>
-                        <p class="price">$7.500</p>
-                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
-                        <p><button>Añadir al carrito</button></p>
+                        <h1>{{ p.nombreProd }}</h1>
+                        <p class="price">{{ p.precioProd }}</p>
+                        <p>{{ p.descripcionProd }}</p>
+                        <p><button onclick="document.getElementById('agregar_carrito').style.display='block'">Añadir al
+                                carrito</button></p>
+                        <div id="agregar_carrito" class="modal" style="text-align: left;">
+                            <form class="modal-content animate" action="/action_page.php" method="post">
+                                <div class="container hola">
+                                    <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
+                                        <div class="col-md-12">
+                                            <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro">
+                                                Polera {{ p.nombreProd }}
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4" style="text-align: center;">
+                                            <img src="{{ p.fotoProd.url }}"
+                                                alt="{{p.fotoProd}}"
+                                                style="margin-top: 10px; width: 100%; max-width: 300px;">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row"
+                                                style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                                                <div class="col-md-4">
+                                                    <h4>Precio</h4>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <p>{{ p.precioProd }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top: 10px;border-bottom: 1px solid #E1E8EE;">
+                                                <div class="col-md-12">
+                                                    <h4>Descripción</h4>
+                                                    <p>{{ p.descripcionProd }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
+                                                <div class="col-md-12">
+                                                    <h4>Cantidad</h4>
+                                                    <input type="number" value="1" class="form-control"
+                                                        style="width: 100px;">
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
+                                                <div class="col-md-12">
+                                                    <p><button class="comprar">Añadir al carrito</button></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container hola" style="background-color:#f1f1f1">
+                                    <button type="button"
+                                        onclick="document.getElementById('agregar_carrito').style.display='none'"
+                                        class="cancelbtn">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <script>
+                            // Get the modal
+                            var modal = document.getElementById('agregar_carrito');
+
+                            // When the user clicks anywhere outside of the modal, close it
+                            window.onclick = function (event) {
+                                if (event.target == modal) {
+                                    modal.style.display = "none";
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 espacio_prod">
-                <div class="card">
-                    <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/polera tommy.jpg' %}" id="polera2" alt="Polera 2" style="width:100%" 
-                            height="215">
-                        <h1>Polera</h1>
-                        <h1>Tommy Hilfiger</h1>
-                        <p class="price">$7.500</p>
-                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
-                        <p><button>Añadir al carrito</button></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 espacio_prod">
-                <div class="card">
-                    <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/polera3.jpg' %}" id="polera3" alt="Polera 3" style="width:100%">
-                        <h1>Polera</h1>
-                        <h1>Jordan</h1>
-                        <p class="price">$7.500</p>
-                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
-                        <p><button>Añadir al carrito</button></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 espacio_prod">
-                <div class="card">
-                    <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/polera1.jpg' %}" id="polera1" alt="Polera 1" style="width:100%">
-                        <h1>Polera</h1>
-                        <h1>Jordan</h1>
-                        <p class="price">$7.500</p>
-                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
-                        <p><button>Añadir al carrito</button></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 espacio_prod">
-                <div class="card">
-                    <div class="card">
-                        <img src="{% static 'AmonStore/imagenes/polera2.jpg' %}" id="polera2" alt="Polera 2" style="width:100%">
-                        <h1>Polera</h1>
-                        <h1>Tommy Hilfiger</h1>
-                        <p class="price">$7.500</p>
-                        <p>Polera Top Quality con estampado a serigrafia y tela prelavada</p>
-                        <p><button>Añadir al carrito</button></p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <!--Fin Poleras-->

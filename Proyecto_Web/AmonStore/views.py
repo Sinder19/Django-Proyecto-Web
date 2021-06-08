@@ -145,19 +145,19 @@ def Modificar(request):
     if producto.nombreProd != nombre:
         producto.nombreProd = nombre
 
-    elif producto.precioProd != precio:
+    if producto.precioProd != precio:
         producto.precioProd = precio
 
-    elif producto.descripcionProd != descripcion:
+    if producto.descripcionProd != descripcion:
         producto.descripcionProd = descripcion
 
-    elif producto.stockProd != stock:
+    if producto.stockProd != stock:
         producto.stockProd = stock
 
-    elif producto.tallaProd != talla:
+    if producto.tallaProd != talla:
         producto.tallaProd = talla
 
-    elif producto.colorProd != color:
+    if producto.colorProd != color:
         producto.colorProd = color
     
     tipo_prod2 = TipoProducto.objects.get(idTipoProd = tipo_prod)

@@ -2,7 +2,7 @@ from typing import ContextManager
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import render, redirect
-from .models import Direccion, Producto, Comuna, Region, TipoUsuario, Usuario, Contactanos
+from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos
 
 # Create your views here.
 def Home(request):
@@ -107,3 +107,66 @@ def Detalle_producto(request):
 
 def Carrito(request):
     return render(request, 'AmonStore/carrito.html')
+
+def Administrar_prod(request):
+    productos = Producto.objects.order_by('idProducto')
+    contexto = {"producto": productos}
+    return render(request, 'AmonStore/Administracion/Administrar_productos.html', contexto)
+
+def Eliminar_prod(request, id):
+    producto = Producto.objects.get(idProducto = id)
+    producto.delete() #elimina el registro
+    messages.success(request,'Producto Eliminado')
+
+    return redirect('Administrar_prod')
+
+def Modificar_prod(request, id):
+    producto = Producto.objects.get(idProducto = id)
+    tipo_prod = TipoProducto.objects.all()
+    contexto = {
+        "producto": producto,
+        "tipo_prod": tipo_prod,    
+    }
+
+    return render (request, 'AmonStore/Administracion/Modificar_prod.html', contexto)
+
+def Modificar(request):
+    id = request.POST['id']
+    nombre = request.POST['nombre']
+    precio = request.POST['precio']
+    descripcion = request.POST['descripcion']
+    stock = request.POST['stock']
+    tipo_prod = request.POST['tipo_prod']
+    talla = request.POST['talla']
+    color = request.POST['color']
+
+    producto = Producto. objects.get(idProducto = id)
+    
+    if producto.nombreProd != nombre:
+        producto.nombreProd = nombre
+
+    elif producto.precioProd != precio:
+        producto.precioProd = precio
+
+    elif producto.descripcionProd != descripcion:
+        producto.descripcionProd = descripcion
+
+    elif producto.stockProd != stock:
+        producto.stockProd = stock
+
+    elif producto.tallaProd != talla:
+        producto.tallaProd = talla
+
+    elif producto.colorProd != color:
+        producto.colorProd = color
+    
+    tipo_prod2 = TipoProducto.objects.get(idTipoProd = tipo_prod)
+    if producto.tipoproducto != tipo_prod2:
+        producto.tipoproducto = tipo_prod2
+    
+    producto.save()
+    messages.success(request, 'Producto Modificado')
+    return redirect('Administrar_prod')
+
+def Administrar_usu(request):
+    return render(request, 'AmonStore/Administracion/Administrar_usuarios.html')

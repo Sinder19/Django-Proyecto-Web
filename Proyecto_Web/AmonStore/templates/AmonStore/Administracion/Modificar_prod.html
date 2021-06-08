@@ -6,11 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contáctanos</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Modificar Producto</title>
     <!--Boostrap4-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -23,36 +19,6 @@
     <link type="text/css" rel="stylesheet" href="{% static 'AmonStore/Css/estilos.css' %}">
     <!--Importe de los iconos para las redes sociales-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#error").hide(); //ocultando el div de los errores
-
-            //Indicar que las validaciones del formulario se ejecutaran solo cuando se
-            //presione el submit
-            $("#formulario_contacto").submit(function () {
-                var mensaje = "Por favor revisar los siguientes detalles en el formulario: ";
-
-                if ($("#nombre_completo").val().trim().length == 0) {
-                    mensaje = mensaje + "<br>El nombre no debe estar vacío";
-                }
-                if ($("#correo").val().trim().length == 0) {
-                    mensaje = mensaje + "<br>El correo electrónico no debe estar vacío";
-                }
-                if ($("#asunto").val().trim().length == 0) {
-                    mensaje = mensaje + "<br>El asunto no debe estar vacío";
-                }
-                if ($("#comentario").val().trim().length == 0) {
-                    mensaje = mensaje + "<br>El comentario no debe estar vacío";
-                }
-                if (mensaje != "Por favor revisar los siguientes detalles en el formulario: ") {
-                    $("#error").html(mensaje); //mostrando el texto de la variable en el div del html
-                    $("#error").show(); //hace visible el div
-                    event.preventDefault(); //evita que los datos del formulario se envie
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -88,14 +54,15 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item_select padding_navbar" href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
+                    <a class="nav-link color_letra padding_navbar"
+                        href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop" data-toggle="dropdown">
-                        Admin
+                    <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
+                        Administrar Productos
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
                         <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
                     </div>
                 </li>
@@ -130,65 +97,100 @@
     </nav>
     <!--Fin Barra Menu-->
 
-    <!--Inicio Formulario-->
-    <div class="container espaciado_superior">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10" style="background-color: #fff; border: black solid 1px;">
-                <h1 style="padding-top: 10px; margin-bottom: 30px;">Comunícate con Nosotros</h1>
-                <form action="{% url 'Enviar_contactanos' %}" method="POST" name="formulario_contacto"
-                    id="formulario_contacto">
-                    {% csrf_token %}
-                    {% if messages %}
-                    <div>
-                        {% for i in messages %}
-                        <p style="color: green;">{{ i }}</p>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-
-                    <div class="form-group">
-                        <label for="nombre_completo">Nombre Completo</label>
-                        <input type="text" class="form-control espacios_input" name="nombre_completo"
-                            id="nombre_completo" placeholder="Ingrese su nombre">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="correo">Correo Eletrónico</label>
-                        <input type="email" class="form-control espacios_input" name="correo" id="correo"
-                            placeholder="ejemplo@ejemplo.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="asunto">Asunto</label>
-                        <input type="text" class="form-control espacios_input" name="asunto" id="asunto">
-                    </div>
-                    <div class="form-group">
-                        <label for="comentario">Comentarios</label>
-                        <textarea class="form-control espacios_input" id="comentario" name="comentario"
-                            rows="5"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <div id="error" class="alert alert-danger"></div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <button type="reset" class="btn btn-primary">Limpiar Campos</button>
-                            </div>
-                        </div>
-                        <div class="col-md-6" style="text-align: right;">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Enviar Formulario</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+    <div class="container" style="background-color: #fff;">
+        <form action="{% url 'Modificar' %}" method="POST">
+            {% csrf_token %}
+            <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
+                <div class="col-md-12">
+                    <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro texto_is">
+                        Polerón <input type="text" name="nombre" class="texto_is" style="border: white solid 0px;"
+                            value="{{ producto.nombreProd }}">
+                    </h1>
+                </div>
             </div>
-            <div class="col-md-1"></div>
-        </div>
+            <div class="row">
+                <div class="col-md-4" style="text-align: center;">
+                    <img src="{{ producto.fotoProd.url }}" alt="{{producto.fotoProd}}"
+                        style="margin-top: 10px; width: 100%; max-width: 300px;">
+                </div>
+                <div class="col-md-8">
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-4">
+                            <h4>ID Producto</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="id" class="form-control" style="width: 100px; margin-bottom: 10px;"
+                                value="{{ producto.idProducto }}" readonly>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-4">
+                            <h4>Precio</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="precio" class="form-control" style="width: 100px; margin-bottom: 10px;"
+                                value="{{ producto.precioProd }}">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-4">
+                            <h4>Descripcion</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="descripcion" class="form-control" value="{{ producto.descripcionProd }}" style="margin-bottom: 10px;">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-4">
+                            <h4>Stock</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" name="stock" class="form-control" style="width: 100px; margin-bottom: 10px;"
+                                value="{{ producto.stockProd }}">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-4">
+                            <h4>Tipo Producto</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <select name="tipo_prod" id="tipo_prod" class="form-control" style="width: 150px; margin-bottom: 10px;">
+                                {% for t in tipo_prod %}
+                                {% if t.idTipoProd == producto.tipoproducto.idTipoProd %}
+                                <option value="{{ t.idTipoProd }}" selected>{{ t.descripcion }}</option>
+                                {% else %}
+                                <option value="{{ t.idTipoProd }}">{{ t.descripcion }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-4">
+                            <h4>Talla</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="talla" class="form-control" style="width: 100px; margin-bottom: 10px;"
+                                value="{{ producto.tallaProd }}">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-4">
+                            <h4>Color</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="color" class="form-control" style="width: 100px; margin-bottom: 10px;"
+                                value="{{ producto.colorProd }}">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-12">
+                            <p><a href="{% url 'Modificar' %}"><button class="comprar">Modificar Producto</button></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
 </body>

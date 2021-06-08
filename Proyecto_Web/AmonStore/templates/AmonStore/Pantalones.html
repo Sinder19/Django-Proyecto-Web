@@ -54,6 +54,15 @@
                 <li class="nav-item">
                     <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop" data-toggle="dropdown">
+                        Admin
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
+                        <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
+                    </div>
+                </li>
             </ul>
             <!--Registrarse / Iniciar Sesion-->
             <ul class="nav navbar-nav navbar-right">

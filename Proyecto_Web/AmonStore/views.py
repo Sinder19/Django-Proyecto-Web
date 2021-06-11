@@ -168,5 +168,83 @@ def Modificar(request):
     messages.success(request, 'Producto Modificado')
     return redirect('Administrar_prod')
 
+def Agregar_prod(request):
+    tipo_prod = TipoProducto.objects.all()
+    contexto = {
+        "tipo_prod" : tipo_prod
+    }
+    return render(request, 'AmonStore/Administracion/Agregar_prod.html', contexto)
+
+def Agregar_producto(request):
+    nombre = request.POST['nombre']
+    precio = request.POST['precio']
+    descripcion = request.POST['descripcion']
+    foto = request.FILES['foto']
+    stock = request.POST['stock']
+    tipoprod = request.POST['tipoproducto']
+    talla = request.POST['talla']
+    color = request.POST['color']
+
+    tipoproducto2 = TipoProducto.objects.get(idTipoProd = tipoprod)
+
+    Producto.objects.create(nombreProd = nombre, precioProd = precio, descripcionProd = descripcion, fotoProd = foto, stockProd = stock, tipoproducto = tipoproducto2, tallaProd = talla, colorProd = color)
+
+    messages.success(request, 'El Producto Ha Sido Agregado Con Exito')
+    return redirect('Administrar_prod') 
+
 def Administrar_usu(request):
-    return render(request, 'AmonStore/Administracion/Administrar_usuarios.html')
+    usuarios = Usuario.objects.order_by('rutUsu')
+    contexto = {"usuarios": usuarios}
+
+    return render(request, 'AmonStore/Administracion/Administrar_usuarios.html', contexto)
+
+def Eliminar_usu(request, rut):
+    usuarios = Usuario.objects.get(rutUsu = rut)
+    usuarios.delete() #elimina el registro
+    messages.success(request,'Usuario Eliminado con Exito')
+
+    return redirect('Administrar_usu')
+
+def Modificar_usu(request, rut):
+    usuarios = Usuario.objects.get(rutUsu = rut)
+    tipo_usu = TipoUsuario.objects.all()
+    contexto = {
+        "usuarios": usuarios,
+        "tipo_usu": tipo_usu,    
+    }
+
+    return render (request, 'AmonStore/Administracion/Modificar_usu.html', contexto)
+
+def Modificar_usuario(request):
+    rutUsu = request.POST['rutUsu']
+    nombreUsu = request.POST['nombreUsu']
+    apellidoUsu = request.POST['apellidoUsu']
+    correoUsu = request.POST['correoUsu']
+    contrasenaUsu = request.POST['contrasenaUsu1']
+    telefonoUsu = request.POST['telefonoUsu']
+    tipousuario = request.POST['tipousuario']
+
+    usuario = Usuario.objects.get(rutUsu = rutUsu)
+
+    if usuario.nombreUsu != nombreUsu:
+        usuario.nombreUsu = nombreUsu
+
+    if usuario.apellidoUsu != apellidoUsu:
+        usuario.apellidoUsu = apellidoUsu
+
+    if usuario.correoUsu != correoUsu:
+        usuario.correoUsu = correoUsu
+
+    if usuario.contrasenaUsu != contrasenaUsu:
+        usuario.contrasenaUsu = contrasenaUsu
+        
+    if usuario.telefonoUsu != telefonoUsu:
+        usuario.telefonoUsu = telefonoUsu
+    
+    tipousuario2 = TipoUsuario.objects.get(idTipoUsu = tipousuario)
+    if usuario.tipousuario != tipousuario2:
+        usuario.tipousuario = tipousuario2
+    
+    usuario.save()
+    messages.success(request, 'Usuario Modificado')
+    return redirect('Administrar_usu')

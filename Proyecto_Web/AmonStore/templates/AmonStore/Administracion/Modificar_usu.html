@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Usuario</title>
+    <!--Boostrap4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--FontLato(Fuente productos)-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!--Importe de los estilos(css)-->
+    <link type="text/css" rel="stylesheet" href="{% static 'AmonStore/Css/estilos.css' %}">
+    <!--Importe de los iconos para las redes sociales-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--Validacion contraseñas iguales-->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#error").hide();
+            $("#modificar").submit(function () {
+                var mensaje = "Por favor revisar los siguientes detalles en el formulario: ";
+
+                if ($("#contrasenaUsu").val() != $("#contrasenaUsu1").val()) {
+                    mensaje = mensaje + "<br>Las contraseñas deben ser iguales";
+                }
+                if (isNaN($("#telefonoUsu").val())) {
+                    mensaje = mensaje + "<br>El teléfono solo puede ser números";
+                }
+                if (mensaje != "Por favor revisar los siguientes detalles en el formulario: ") {
+                    $("#error").html(mensaje); //mostrando el texto de la variable en el div del html
+                    $("#error").show(); //hace visible el div
+                    event.preventDefault(); //evita que los datos del formulario se envie
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!--Inicio Barra Menu-->
+    <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0;">
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}"
+                alt="Logo" width="50px"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+        <!--Opciones-->
+        <div class="collapse navbar-collapse" id="navb">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Home' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar" href="{% url 'Quienes_somos' %}">¿Quiénes somos?</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
+                        Productos
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Polerones' %}">Polerones</a>
+                        <a class="dropdown-item" href="{% url 'Poleras' %}">Poleras</a>
+                        <a class="dropdown-item" href="{% url 'Pantalones' %}">Pantalones</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color_letra padding_navbar"
+                        href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
+                        Modificar Usuario
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
+                        <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
+                    </div>
+                </li>
+            </ul>
+            <!--Registrarse / Iniciar Sesion-->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="separacion_reg_ini">
+                    <a href="{% url 'Registrarse' %}" class="color_letra2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg>
+                        Registrarse
+                    </a>
+                </li>
+                <li class="separacion_reg_ini bottom_ini">
+                    <a href="{% url 'Inicio_sesion' %}" class=" color_letra2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                            <path fill-rule="evenodd"
+                                d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                        </svg>
+                        Iniciar Sesión
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--Fin Barra Menu-->
+
+    <!--Inicio Modificar Usuario-->
+    <div class="container" style="background-color: #fff; border-radius: 10px;">
+        <div class="row" style="margin-top: 30px; border-bottom: 1px solid #dee2e6;">
+            <div class="col-md-12">
+                <h2 style="margin-top: 10px;">Modificar Usuario</h2>
+            </div>
+        </div>
+        <form action="{% url 'Modificar_usuario' %}" method="POST" name="modificar" id="modificar">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="rutUsu" style="font-size: 20px; margin-top: 10px;">Rut Usuario</label>
+                        <input type="text" name="rutUsu" id="rutUsu" class="form-control" value="{{ usuarios.rutUsu }}"
+                            style="margin-bottom: 10px;" required readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="contrasenaUsu" style="font-size: 20px; margin-top: 10px;">Contraseña Usuario</label>
+                        <input type="text" name="contrasenaUsu" id="contrasenaUsu" class="form-control"
+                            value="{{ usuarios.contrasenaUsu }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="nombreUsu" style="font-size: 20px; margin-top: 10px;">Nombre Usuario</label>
+                        <input type="text" name="nombreUsu" id="nombreUsu" class="form-control"
+                            value="{{ usuarios.nombreUsu }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="contrasenaUsu1" style="font-size: 20px; margin-top: 10px;">Repetir Contraseña Usuario</label>
+                        <input type="text" name="contrasenaUsu1" id="contrasenaUsu1" class="form-control"
+                            value="{{ usuarios.contrasenaUsu }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="apellidoUsu" style="font-size: 20px; margin-top: 10px;">Apellido Usuario</label>
+                        <input type="text" name="apellidoUsu" id="apellidoUsu" class="form-control"
+                            value="{{ usuarios.apellidoUsu }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="telefonoUsu" style="font-size: 20px; margin-top: 10px;">Telefono Usuario</label>
+                        <input type="text" name="telefonoUsu" id="telefonoUsu" class="form-control"
+                            value="{{ usuarios.telefonoUsu }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="correoUsu" style="font-size: 20px; margin-top: 10px;">Correo Usuario</label>
+                        <input type="text" name="correoUsu" id="correoUsu" class="form-control"
+                            value="{{ usuarios.correoUsu }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="telefonoUsu" style="font-size: 20px; margin-top: 10px;">Tipo Usuario</label>
+                        <select name="tipousuario" id="tipousuario" class="form-control"
+                            style="width: 150px; margin-bottom: 10px;">
+                            {% for t in tipo_usu %}
+                            {% if t.idTipoUsu == usuarios.tipousuario.idTipoUsu %}
+                            <option value="{{ t.idTipoUsu }}" selected>{{ t.descripcion }}</option>
+                            {% else %}
+                            <option value="{{ t.idTipoUsu }}">{{ t.descripcion }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div> 
+            <div class="form-group">
+                <div id="error" class="alert alert-danger"></div>
+            </div>
+            <div class="row" style="margin-top: 10px; padding-bottom: 10px;">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <p><a href="{% url 'Modificar' %}"><button class="comprar">Modificar Usuario</button></a></p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </form>
+    </div>
+    <!--Fin Modificar Usuario-->
+    .
+</body>
+
+</html>

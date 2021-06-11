@@ -60,9 +60,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
                         data-toggle="dropdown">
-                        Administrar Productos
+                        Modificar Producto
                     </a>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
                         <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
                     </div>
                 </li>
@@ -97,7 +98,8 @@
     </nav>
     <!--Fin Barra Menu-->
 
-    <div class="container" style="background-color: #fff;">
+    <!--Inicio Modificar Producto-->
+    <div class="container" style="background-color: #fff; border-radius: 10px;">
         <form action="{% url 'Modificar' %}" method="POST">
             {% csrf_token %}
             <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
@@ -119,8 +121,8 @@
                             <h4>ID Producto</h4>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="id" class="form-control" style="width: 100px; margin-bottom: 10px;"
-                                value="{{ producto.idProducto }}" readonly>
+                            <input type="number" name="id" class="form-control"
+                                style="width: 100px; margin-bottom: 10px;" value="{{ producto.idProducto }}" readonly>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
@@ -128,8 +130,8 @@
                             <h4>Precio</h4>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="precio" class="form-control" style="width: 100px; margin-bottom: 10px;"
-                                value="{{ producto.precioProd }}">
+                            <input type="number" name="precio" class="form-control"
+                                style="width: 100px; margin-bottom: 10px;" value="{{ producto.precioProd }}" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
@@ -137,7 +139,8 @@
                             <h4>Descripcion</h4>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="descripcion" class="form-control" value="{{ producto.descripcionProd }}" style="margin-bottom: 10px;">
+                            <input type="text" name="descripcion" class="form-control"
+                                value="{{ producto.descripcionProd }}" style="margin-bottom: 10px;" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
@@ -145,8 +148,8 @@
                             <h4>Stock</h4>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" name="stock" class="form-control" style="width: 100px; margin-bottom: 10px;"
-                                value="{{ producto.stockProd }}">
+                            <input type="number" name="stock" class="form-control"
+                                style="width: 100px; margin-bottom: 10px;" value="{{ producto.stockProd }}" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
@@ -154,7 +157,8 @@
                             <h4>Tipo Producto</h4>
                         </div>
                         <div class="col-md-8">
-                            <select name="tipo_prod" id="tipo_prod" class="form-control" style="width: 150px; margin-bottom: 10px;">
+                            <select name="tipo_prod" id="tipo_prod" class="form-control"
+                                style="width: 150px; margin-bottom: 10px;">
                                 {% for t in tipo_prod %}
                                 {% if t.idTipoProd == producto.tipoproducto.idTipoProd %}
                                 <option value="{{ t.idTipoProd }}" selected>{{ t.descripcion }}</option>
@@ -170,8 +174,8 @@
                             <h4>Talla</h4>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="talla" class="form-control" style="width: 100px; margin-bottom: 10px;"
-                                value="{{ producto.tallaProd }}">
+                            <input type="text" name="talla" class="form-control"
+                                style="width: 100px; margin-bottom: 10px;" value="{{ producto.tallaProd }}" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
@@ -179,20 +183,22 @@
                             <h4>Color</h4>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="color" class="form-control" style="width: 100px; margin-bottom: 10px;"
-                                value="{{ producto.colorProd }}">
+                            <input type="text" name="color" class="form-control"
+                                style="width: 100px; margin-bottom: 10px;" value="{{ producto.colorProd }}" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
                         <div class="col-md-12">
-                            <p><a href="{% url 'Modificar' %}"><button class="comprar">Modificar Producto</button></a></p>
+                            <p><a href="{% url 'Modificar' %}"><button class="comprar">Modificar Producto</button></a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-
+    <!--Inicio Modificar Producto-->
+    .
 </body>
 
 </html>

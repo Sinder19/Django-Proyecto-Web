@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse, Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Detalle_producto, Carrito, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos, Administrar_prod, Administrar_usu, Eliminar_prod, Modificar_prod, Modificar
+from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse, Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Detalle_producto, Carrito, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos, Administrar_prod, Administrar_usu, Eliminar_prod, Modificar_prod, Modificar, Eliminar_usu, Modificar_usu, Modificar_usuario, Agregar_prod, Agregar_producto
 
 urlpatterns = [
     path('', Home, name="Home"),
@@ -24,4 +24,9 @@ urlpatterns = [
     path('Modificar_prod/<int:id>', Modificar_prod, name="Modificar_prod"),
     path('Modificar', Modificar, name="Modificar"),
     path('Administrar_usu', Administrar_usu, name="Administrar_usu"),
+    path('Eliminar_usu/<rut>', Eliminar_usu, name="Eliminar_usu"),
+    path('Modificar_usu/<rut>', Modificar_usu, name="Modificar_usu"),
+    path('Modificar_usuario', Modificar_usuario, name="Modificar_usuario"),
+    path('Agregar_prod', Agregar_prod, name="Agregar_prod"),
+    path('Agregar_producto', Agregar_producto, name="Agregar_producto"),
 ]

@@ -100,10 +100,7 @@ def Inicio_sesion(request):
     return render(request, 'AmonStore/inicio_sesion.html')
 
 def Olvidaste_clave(request):
-    return render(request, 'AmonStore/olvidaste_clave.html')
-
-def Detalle_producto(request):
-    return render(request, 'AmonStore/detalle_producto.html')
+    return render(request, 'AmonStore/olvidaste_clave.html')    
 
 def Carrito(request):
     return render(request, 'AmonStore/carrito.html')
@@ -248,3 +245,9 @@ def Modificar_usuario(request):
     usuario.save()
     messages.success(request, 'Usuario Modificado')
     return redirect('Administrar_usu')
+    
+def Ver_producto(request, id):
+    producto = Producto.objects.get(idProducto = id)
+    contexto = {"producto":producto}
+
+    return render(request, 'AmonStore/detalle_producto.html', contexto)

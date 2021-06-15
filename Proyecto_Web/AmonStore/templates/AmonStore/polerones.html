@@ -54,10 +54,12 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
+                    <a class="nav-link color_letra padding_navbar"
+                        href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
                         Admin
                     </a>
                     <div class="dropdown-menu">
@@ -107,99 +109,32 @@
                     style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
                     type="submit">Buscar</button>
                 <a href="{% url 'Polerones' %}"><button class="btn btn-primary"
-                    style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
-                    type="button">Borrar Filtro</button></a>
+                        style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
+                        type="button">Borrar Filtro</button></a>
             </div>
         </div>
     </form>
 
     <!--Polerones-->
     <div class="container">
-        <div class="row">
-            {% for p in producto%}
-            <div class="col-md-4 espacio_prod">
-                <div class="card">
+        <form action="" id="verProds" name="verProds">
+            <div class="row">
+                {% for p in producto%}
+                <div class="col-md-4 espacio_prod">
                     <div class="card">
-                        <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="width: 100%;">
-                        <h1>Polerón</h1>
-                        <h1>{{ p.nombreProd }}</h1>
-                        <p class="price">{{ p.precioProd }}</p>
-                        <p>{{ p.descripcionProd }}</p>
-                        <p><button onclick="document.getElementById('agregar_carrito').style.display='block'">Añadir al
-                                carrito</button></p>
-                        <div id="agregar_carrito" class="modal" style="text-align: left;">
-                            <form class="modal-content animate" action="/action_page.php" method="post">
-                                <div class="container hola">
-                                    <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
-                                        <div class="col-md-12">
-                                            <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro">
-                                                Polerón {{ p.nombreProd }}
-                                            </h1>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4" style="text-align: center;">
-                                            <img src="{% static 'AmonStore/Imagenes/{{ p.fotoProd }}' %}"
-                                                alt="{{p.fotoProd}}"
-                                                style="margin-top: 10px; width: 100%; max-width: 300px;">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="row"
-                                                style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-4">
-                                                    <h4>Precio</h4>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>{{ p.precioProd }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="margin-top: 10px;border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-12">
-                                                    <h4>Descripción</h4>
-                                                    <p>{{ p.descripcionProd }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-12">
-                                                    <h4>Cantidad</h4>
-                                                    <input type="number" value="1" class="form-control"
-                                                        style="width: 100px;">
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-12">
-                                                    <p><button class="comprar">Añadir al carrito</button></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container hola" style="background-color:#f1f1f1">
-                                    <button type="button"
-                                        onclick="document.getElementById('agregar_carrito').style.display='none'"
-                                        class="cancelbtn">Cancelar</button>
-                                </div>
-                            </form>
+                        <div class="card">
+                            <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="width: 100%;">
+                            <h1>Polerón</h1>
+                            <h1>{{ p.nombreProd }}</h1>
+                            <p class="price">{{ p.precioProd }}</p>
+                            <p>{{ p.descripcionProd }}</p>
+                            <p><a href="{% url 'Ver_producto' p.idProducto %}"><button>Añadir al carrito</button></a></p>
                         </div>
-
-                        <script>
-                            // Get the modal
-                            var modal = document.getElementById('agregar_carrito');
-
-                            // When the user clicks anywhere outside of the modal, close it
-                            window.onclick = function (event) {
-                                if (event.target == modal) {
-                                    modal.style.display = "none";
-                                }
-                            }
-                        </script>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
+        </form>
     </div>
     <!--Fin Polerones-->
 

@@ -125,76 +125,7 @@
                         <h1>{{ p.nombreProd }}</h1>
                         <p class="price">{{ p.precioProd }}</p>
                         <p>{{ p.descripcionProd }}</p>
-                        <p><button onclick="document.getElementById('agregar_carrito').style.display='block'">Añadir al
-                                carrito</button></p>
-                        <div id="agregar_carrito" class="modal" style="text-align: left;">
-                            <form class="modal-content animate" action="/action_page.php" method="post">
-                                <div class="container hola">
-                                    <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
-                                        <div class="col-md-12">
-                                            <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro">
-                                                Polera {{ p.nombreProd }}
-                                            </h1>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4" style="text-align: center;">
-                                            <img src="{{ p.fotoProd.url }}"
-                                                alt="{{p.fotoProd}}"
-                                                style="margin-top: 10px; width: 100%; max-width: 300px;">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="row"
-                                                style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-4">
-                                                    <h4>Precio</h4>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>{{ p.precioProd }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="margin-top: 10px;border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-12">
-                                                    <h4>Descripción</h4>
-                                                    <p>{{ p.descripcionProd }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-12">
-                                                    <h4>Cantidad</h4>
-                                                    <input type="number" value="1" class="form-control"
-                                                        style="width: 100px;">
-                                                </div>
-                                            </div>
-                                            <div class="row"
-                                                style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-                                                <div class="col-md-12">
-                                                    <p><button class="comprar">Añadir al carrito</button></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container hola" style="background-color:#f1f1f1">
-                                    <button type="button"
-                                        onclick="document.getElementById('agregar_carrito').style.display='none'"
-                                        class="cancelbtn">Cancelar</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <script>
-                            // Get the modal
-                            var modal = document.getElementById('agregar_carrito');
-
-                            // When the user clicks anywhere outside of the modal, close it
-                            window.onclick = function (event) {
-                                if (event.target == modal) {
-                                    modal.style.display = "none";
-                                }
-                            }
-                        </script>
+                        <p><button>Añadir al carrito</button></p>
                     </div>
                 </div>
             </div>

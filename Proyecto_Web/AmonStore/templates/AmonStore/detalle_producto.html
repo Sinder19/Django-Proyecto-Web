@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +24,8 @@
 <body>
     <!--Inicio Barra Menu-->
     <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0;">
-        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}"
+                alt="Logo" width="50px"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
                 viewBox="0 0 16 16">
@@ -49,12 +51,13 @@
 
                         <a class="dropdown-item" href="{% url 'Polerones' %}"
                             style="background-color: #39B6EC; color: white !important;">Polerones</a>
-                            <a class="dropdown-item" href="{% url 'Poleras' %}">Poleras</a>
-                            <a class="dropdown-item" href="{% url 'Pantalones' %}">Pantalones</a>
+                        <a class="dropdown-item" href="{% url 'Poleras' %}">Poleras</a>
+                        <a class="dropdown-item" href="{% url 'Pantalones' %}">Pantalones</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
+                    <a class="nav-link color_letra padding_navbar"
+                        href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
             </ul>
             <!--Registrarse / Iniciar Sesion-->
@@ -88,43 +91,46 @@
     <!--Fin Barra Menu-->
 
     <div class="container" style="background-color: #fff; border-radius: 10px; color: #555657;">
-        <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
-            <div class="col-md-12">
-                <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro">Poleron Calvin Klein</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4" style="text-align: center;">
-                <img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt="Poleron 1" class="img_detalle" style="margin-top: 10px;">
-            </div>
-            <div class="col-md-8">
-                <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
-                    <div class="col-md-2">
-                        <h4>Precio</h4>
-                    </div>
-                    <div class="col-md-10">
-                        <p class="texto_detalle" style="margin-bottom: 0; font-size: 20px;">$14.000</p>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 10px;border-bottom: 1px solid #E1E8EE;">
-                    <div class="col-md-12">
-                        <h4>Descripción</h4>
-                        <p>Poleron Top Quality con estampado a serigrafia y tela prelavada</p>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-                    <div class="col-md-12">
-                        <h4>Cantidad</h4>
-                        <input type="number" value="1" class="form-control" style="width: 100px;">
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-                    <div class="col-md-12">
-                        <p><button class="comprar">Añadir al carrito</button></p>
-                    </div>
+        <form action="" method="POST" name="carrito" id="carrito">
+            <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
+                <div class="col-md-12">
+                    <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro">Poleron Calvin Klein</h1>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-4" style="text-align: center;">
+                    <img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt="Poleron 1" class="img_detalle"
+                        style="margin-top: 10px;">
+                </div>
+                <div class="col-md-8">
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-2">
+                            <h4>Precio</h4>
+                        </div>
+                        <div class="col-md-10">
+                            <p class="texto_detalle" style="margin-bottom: 0; font-size: 20px;">$14.000</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-12">
+                            <h4>Descripción</h4>
+                            <p>Poleron Top Quality con estampado a serigrafia y tela prelavada</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-12">
+                            <h4>Cantidad</h4>
+                            <input type="number" value="1" class="form-control" style="width: 100px;">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-12">
+                            <p><button class="comprar">Añadir al carrito</button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
 

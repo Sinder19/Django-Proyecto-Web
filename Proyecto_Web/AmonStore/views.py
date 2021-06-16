@@ -137,7 +137,7 @@ def Modificar(request):
     talla = request.POST['talla']
     color = request.POST['color']
 
-    producto = Producto. objects.get(idProducto = id)
+    producto = Producto.objects.get(idProducto = id)
     
     if producto.nombreProd != nombre:
         producto.nombreProd = nombre
@@ -263,3 +263,15 @@ def Ver_pantalon(request, id):
     contexto = {"producto":producto}
 
     return render(request, 'AmonStore/Productos/detalle_pantalon.html', contexto)
+
+
+def Carrito_poleron(request, id):
+    cant = request.POST['cantidad']
+    
+    poleron = Producto.objects.get(idProducto = id)
+    usuario = Usuario.objects.get(rutUsu = '20832119-6')
+
+    Carrito.objects.create(producto = poleron, cantidadProd = cant, usuario = usuario)
+
+    messages.success(request, 'El Producto Ha Sido Agregado al Carrito')
+    return redirect('Ver_poleron')

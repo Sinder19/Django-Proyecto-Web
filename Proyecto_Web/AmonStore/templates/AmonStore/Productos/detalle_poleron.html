@@ -134,15 +134,17 @@
                                 id="cantidad">
                         </div>
                     </div>
+                    <div class="row" style="margin-top: 10px; padding-bottom: 10px; padding-bottom: 0px;">
+                        <div class="col-md-12">
+                            <p><button type="submit" class="comprar">Añadir al carrito</button></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
-        <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-            <div class="col-md-6">
-                <p><a href="{% url 'Carrito_poleron' producto.idProducto %}"><button class="comprar">Añadir al
-                            carrito</button></a></p>
-            </div>
-            <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
                 <p><a href="{% url 'Polerones' %}"><button class="comprar"
                             style="background-color: #f44336 !important;">Cancelar</button></a></p>
             </div>

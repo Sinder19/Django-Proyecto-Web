@@ -2,7 +2,7 @@ from typing import ContextManager
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import render, redirect
-from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos
+from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos, Carrito
 
 # Create your views here.
 def Home(request):
@@ -14,35 +14,35 @@ def Quienes_somos(request):
 def Polerones(request):
     polerones = Producto.objects.filter(tipoproducto = 1)
     contexto = {"producto": polerones}
-    return render(request, 'AmonStore/polerones.html', contexto)
+    return render(request, 'AmonStore/Productos/polerones.html', contexto)
 
 def Buscar_polerones(request):
     buscar = request.POST['buscar']
     polerones = Producto.objects.filter(tipoproducto = 1, nombreProd__icontains = buscar)
     contexto = {"producto": polerones}
-    return render(request, 'AmonStore/polerones.html', contexto)
+    return render(request, 'AmonStore/Productos/polerones.html', contexto)
 
 def Poleras(request):
     poleras = Producto.objects.filter(tipoproducto = 2)
     contexto = {"producto": poleras}
-    return render(request, 'AmonStore/poleras.html', contexto)
+    return render(request, 'AmonStore/Productos/poleras.html', contexto)
 
 def Buscar_poleras(request):
     buscar = request.POST['buscar']
     polerones = Producto.objects.filter(tipoproducto = 2, nombreProd__icontains = buscar)
     contexto = {"producto": polerones}
-    return render(request, 'AmonStore/poleras.html', contexto)
+    return render(request, 'AmonStore/Productos/poleras.html', contexto)
 
 def Pantalones(request):
     pantalones = Producto.objects.filter(tipoproducto = 3)
     contexto = {"producto": pantalones}
-    return render(request, 'AmonStore/Pantalones.html', contexto)
+    return render(request, 'AmonStore/Productos/Pantalones.html', contexto)
 
 def Buscar_pantalones(request):
     buscar = request.POST['buscar']
     polerones = Producto.objects.filter(tipoproducto = 3, nombreProd__icontains = buscar)
     contexto = {"producto": polerones}
-    return render(request, 'AmonStore/Pantalones.html', contexto) 
+    return render(request, 'AmonStore/Productos/Pantalones.html', contexto) 
 
 def Contactanos_mensaje(request):
     return render(request, 'AmonStore/contactanos.html')
@@ -246,8 +246,20 @@ def Modificar_usuario(request):
     messages.success(request, 'Usuario Modificado')
     return redirect('Administrar_usu')
     
-def Ver_producto(request, id):
+def Ver_poleron(request, id):
     producto = Producto.objects.get(idProducto = id)
     contexto = {"producto":producto}
 
-    return render(request, 'AmonStore/detalle_producto.html', contexto)
+    return render(request, 'AmonStore/Productos/detalle_poleron.html', contexto)
+
+def Ver_polera(request, id):
+    producto = Producto.objects.get(idProducto = id)
+    contexto = {"producto":producto}
+
+    return render(request, 'AmonStore/Productos/detalle_polera.html', contexto)
+
+def Ver_pantalon(request, id):
+    producto = Producto.objects.get(idProducto = id)
+    contexto = {"producto":producto}
+
+    return render(request, 'AmonStore/Productos/detalle_pantalon.html', contexto)

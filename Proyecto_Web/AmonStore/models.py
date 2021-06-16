@@ -97,3 +97,9 @@ class Contactanos(models.Model):
 
     def __str__(self) -> str:
         return self.nombre
+
+class Carrito(models.Model):
+    idCarrito = models.AutoField(primary_key=True, verbose_name="Id del Carrito")
+    producto = models.ForeignKey(Producto, on_delete=CASCADE)
+    cantidadProd = models.IntegerField(verbose_name="Cantidad de Producto", blank=False, null=False)
+    usuario = models.ForeignKey(Usuario, on_delete=CASCADE)

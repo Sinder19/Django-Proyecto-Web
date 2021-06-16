@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pantalones</title>
     <!--Boostrap4-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,6 +19,7 @@
     <link type="text/css" rel="stylesheet" href="{% static 'AmonStore/Css/estilos.css' %}">
     <!--Importe de los iconos para las redes sociales-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -43,21 +44,28 @@
                     <a class="nav-link color_letra padding_navbar" href="{% url 'Quienes_somos' %}">¿Quiénes somos?</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                    <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
                         data-toggle="dropdown">
-                        Productos
+                        Pantalones
                     </a>
                     <div class="dropdown-menu">
-
-                        <a class="dropdown-item" href="{% url 'Polerones' %}"
-                            style="background-color: #39B6EC; color: white !important;">Polerones</a>
                         <a class="dropdown-item" href="{% url 'Poleras' %}">Poleras</a>
-                        <a class="dropdown-item" href="{% url 'Pantalones' %}">Pantalones</a>
+                        <a class="dropdown-item" href="{% url 'Polerones' %}">Polerones</a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link color_letra padding_navbar"
                         href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
+                        Admin
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
+                        <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
+                    </div>
                 </li>
             </ul>
             <!--Registrarse / Iniciar Sesion-->
@@ -74,7 +82,7 @@
                     </a>
                 </li>
                 <li class="separacion_reg_ini bottom_ini">
-                    <a href="{% url 'Inicio_sesion' %}" class=" color_letra2">
+                    <a href="{% url 'Inicio_sesion' %}" class="color_letra2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                             class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -90,48 +98,97 @@
     </nav>
     <!--Fin Barra Menu-->
 
-    <div class="container" style="background-color: #fff; border-radius: 10px; color: #555657;">
-        <form action="" method="POST" name="carrito" id="carrito">
-            <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
-                <div class="col-md-12">
-                    <h1 style="margin-left: 20px; margin-top: 10px;" class="titulo_det_centro">Poleron Calvin Klein</h1>
-                </div>
-            </div>
+    <!--Buscar-->
+    <form action="{% url 'Buscar_pantalones' %}" method="POST" name="buscar_polera" id="buscar_polera">
+        {% csrf_token %}
+        <div class="container">
             <div class="row">
-                <div class="col-md-4" style="text-align: center;">
-                    <img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt="Poleron 1" class="img_detalle"
-                        style="margin-top: 10px;">
-                </div>
-                <div class="col-md-8">
-                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
-                        <div class="col-md-2">
-                            <h4>Precio</h4>
-                        </div>
-                        <div class="col-md-10">
-                            <p class="texto_detalle" style="margin-bottom: 0; font-size: 20px;">$14.000</p>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 10px;border-bottom: 1px solid #E1E8EE;">
-                        <div class="col-md-12">
-                            <h4>Descripción</h4>
-                            <p>Poleron Top Quality con estampado a serigrafia y tela prelavada</p>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-                        <div class="col-md-12">
-                            <h4>Cantidad</h4>
-                            <input type="number" value="1" class="form-control" style="width: 100px;">
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
-                        <div class="col-md-12">
-                            <p><button class="comprar">Añadir al carrito</button></p>
-                        </div>
+                <input class="form-control mr-sm-2 buscar" name="buscar" type="text" placeholder="Ingresar Producto"
+                    style="margin-top: 1rem; margin-bottom: 1rem;" required>
+                <button class="btn btn-primary"
+                    style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
+                    type="submit">Buscar</button>
+                <a href="{% url 'Pantalones' %}"><button class="btn btn-primary"
+                        style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
+                        type="button">Borrar Filtro</button></a>
+            </div>
+        </div>
+    </form>
+
+    <!--Pantalones-->
+    <div class="container">
+        <div class="row">
+            {% for p in producto%}
+            <div class="col-md-4 espacio_prod">
+                <div class="card">
+                    <div class="card">
+                        <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="width: 100%;">
+                        <h1>Pantalón</h1>
+                        <h1>{{ p.nombreProd }}</h1>
+                        <p class="price">${{ p.precioProd }}</p>
+                        <p>{{ p.descripcionProd }}</p>
+                        <p><a href="{% url 'Ver_pantalon' p.idProducto %}"><button>Añadir al carrito</button></a></p>
                     </div>
                 </div>
             </div>
-        </form>
+            {% endfor %}
+        </div>
     </div>
+    <!--Fin Pantalones-->
+
+    <!--Inicio Pie de Página-->
+    <footer class="bg-light text-center text-lg-start" style="margin-top: 50px;">
+        <div class="container-fluid p-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">Horarios de Atención</h5>
+
+                    <ul class="list-unstyled mb-0" style="line-height: 1;">
+                        <li>
+                            <p class="text-dark">Lunes: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Martes: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Miércoles: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Jueves: 10:00 a 20:00</p>
+                        </li>
+                        <li>
+                            <p class="text-dark">Viernes: 10:00 a 20:00</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="text-uppercase mb-0" style="padding-bottom: 10px;">Redes Sociales</h5>
+
+                    <ul class="list-unstyled lados_pie_pag">
+                        <p>
+                            <a href="https://www.instagram.com/amon.store._/?hl=es" class="fa fa-instagram"></a>
+                            <a href="#" class="fa fa-facebook"></a>
+                        </p>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="text-uppercase">Contáctanos</h5>
+
+                    <ul class="list-unstyled mb-0" style="line-height: 1;">
+                        <li>
+                            <p>Telefono: +56 9 4998 3478</p>
+                        </li>
+                        <li>
+                            <p>Correo Electrónico: a.gonzalez3@duocuc.cl</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Fin Pie de Página-->
 </body>
 
 </html>

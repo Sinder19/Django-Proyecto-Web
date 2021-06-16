@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poleras</title>
+    <title>Polerones</title>
     <!--Boostrap4-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -46,18 +46,20 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
                         data-toggle="dropdown">
-                        Poleras
+                        Polerones
                     </a>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Poleras' %}">Poleras</a>
                         <a class="dropdown-item" href="{% url 'Pantalones' %}">Pantalones</a>
-                        <a class="dropdown-item" href="{% url 'Polerones' %}">Polerones</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
+                    <a class="nav-link color_letra padding_navbar"
+                        href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
                         Admin
                     </a>
                     <div class="dropdown-menu">
@@ -68,7 +70,7 @@
             </ul>
             <!--Registrarse / Iniciar Sesion-->
             <ul class="nav navbar-nav navbar-right">
-                <li class="separacion_reg_ini ">
+                <li class="separacion_reg_ini">
                     <a href="{% url 'Registrarse' %}" class="color_letra2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                             class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -97,7 +99,7 @@
     <!--Fin Barra Menu-->
 
     <!--Buscar-->
-    <form action="{% url 'Buscar_poleras' %}" method="POST" name="buscar_polera" id="buscar_polera">
+    <form action="{% url 'Buscar_polerones' %}" method="POST" name="buscar_poleron" id="buscar_poleron">
         {% csrf_token %}
         <div class="container">
             <div class="row">
@@ -106,33 +108,33 @@
                 <button class="btn btn-primary"
                     style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
                     type="submit">Buscar</button>
-                <a href="{% url 'Poleras' %}"><button class="btn btn-primary"
-                    style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
-                    type="button">Borrar Filtro</button></a>
+                <a href="{% url 'Polerones' %}"><button class="btn btn-primary"
+                        style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
+                        type="button">Borrar Filtro</button></a>
             </div>
         </div>
     </form>
 
-    <!--Poleras-->
+    <!--Polerones-->
     <div class="container">
         <div class="row">
-            {% for p in producto%}
+            {% for p in producto %}
             <div class="col-md-4 espacio_prod">
                 <div class="card">
                     <div class="card">
-                        <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="height: 100%; max-height: 200px;">
-                        <h1>Polera</h1>
+                        <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="width: 100%;">
+                        <h1>Polerón</h1>
                         <h1>{{ p.nombreProd }}</h1>
-                        <p class="price">{{ p.precioProd }}</p>
+                        <p class="price">${{ p.precioProd }}</p>
                         <p>{{ p.descripcionProd }}</p>
-                        <p><button>Añadir al carrito</button></p>
+                        <p><a href="{% url 'Ver_poleron' p.idProducto %}"><button>Añadir al carrito</button></a></p>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-    <!--Fin Poleras-->
+    <!--Fin Polerones-->
 
     <!--Inicio Pie de Página-->
     <footer class="bg-light text-center text-lg-start" style="margin-top: 50px;">

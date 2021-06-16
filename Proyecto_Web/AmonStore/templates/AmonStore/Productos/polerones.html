@@ -122,7 +122,13 @@
                 {% if messages %}
                 <div>
                     {% for i in messages %}
-                    <p style="color: green; font-size: 20px; background-color: #fff; text-align: center; padding-top: 10px; padding-bottom: 10px; border-radius: 20px;">{{ i }}</p>
+                    <p
+                        style="color: green; font-size: 20px; background-color: #fff; text-align: center; padding-top: 10px; padding-bottom: 10px; border-radius: 20px;">
+                        {{ i }}
+                        <a style="color: #013009; font-size: 20px; background-color: #fff; text-align: center; padding-top: 10px; padding-bottom: 10px; border-radius: 20px;"
+                            href="{% url 'Ver_carrito' %}">Carrito
+                        </a>
+                    </p>
                     {% endfor %}
                 </div>
                 {% endif %}

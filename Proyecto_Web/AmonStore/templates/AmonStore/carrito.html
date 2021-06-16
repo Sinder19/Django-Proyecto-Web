@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +24,8 @@
 <body>
     <!--Inicio Barra Menu-->
     <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0;">
-        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}"
+                alt="Logo" width="50px"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
                 viewBox="0 0 16 16">
@@ -52,7 +54,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
+                    <a class="nav-link color_letra padding_navbar"
+                        href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
             </ul>
             <!--Registrarse / Iniciar Sesion-->
@@ -88,11 +91,18 @@
             <div class="col-md-12">
                 <h2 style="margin-top: 10px;">Carrito de Compras</h2>
             </div>
+            {% if messages %}
+            <div>
+                {% for i in messages %}
+                <p style="color: green; margin-left: 15px; font-size: 20px;">{{ i }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
         <div class="row">
             <div class="col-md-12">
                 <table class="table">
-                    <thead>
+                    <thead style="text-align: center;">
                         <tr>
                             <th>#</th>
                             <th style="width: 170px;">Imagen</th>
@@ -100,19 +110,40 @@
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
                             <th>Total</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="text-align: center;">
                         {% for c in carrito %}
                         <tr>
                             <td>{{ c.idCarrito }}</td>
-                            <td><img src="{{ c.producto.fotoProd.url }}" alt="" style="width: 100%; max-width: 150px;"></td>
+                            <td><img src="{{ c.producto.fotoProd.url }}" alt="" style="width: 100%; max-width: 150px;">
+                            </td>
                             <td>{{ c.producto.tipoproducto.descripcion }} {{ c.producto.nombreProd }}</td>
                             <td>{{ c.cantidadProd }}</td>
                             <td>${{ c.producto.precioProd }}</td>
                             <td>${{ c.totalProd }}</td>
+                            <td>
+                                <a href="{% url 'Eliminar_prod_carrito' c.idCarrito %}" style="color: black;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path
+                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                        <path fill-rule="evenodd"
+                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                    </svg>
+                                </a>
+                            </td>
                         </tr>
                         {% endfor %}
+                        <tr style="font-size: 20px;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>TOTAL A PAGAR</td>
+                            <td>${{ suma.totalProd__sum }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -122,35 +153,6 @@
         <div class="row">
             <div class="col-md-6"></div>
             <div class="col-md-6 fondo_carrito">
-                <div class="row">
-                    <div class="col-md-12" style="border-bottom: #B1B4B7 solid 2px; margin-top: 10px;">
-                        <h3>Detalle del Pago</h3>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-md-6" style="border-right: #B1B4B7 solid 2px;">
-                        <h4>Subtotal</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4>$60.504</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6" style="border-right: #B1B4B7 solid 2px;">
-                        <h4>Iva</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4>$11.496</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6" style="border-right: #B1B4B7 solid 2px;">
-                        <h4>Total a Pagar</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4>$72.000</h4>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <p><button class="pagar">Pagar</button></p>

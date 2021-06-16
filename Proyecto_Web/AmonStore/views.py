@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.db.models.fields import IntegerField
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos, Carrito
 
@@ -271,7 +271,7 @@ def Carrito_poleron(request, id):
     total = int(cant) * int(poleron.precioProd)
 
     Carrito.objects.create(cantidadProd = cant, totalProd = total, usuario = usuario, producto = poleron)
-    messages.success(request, 'El Producto Ha Sido Agregado al Carrito')
+    messages.success(request, 'El Producto Ha Sido Agregado al ')
     return redirect('Polerones')
 
 def Carrito_polera(request, id):
@@ -284,7 +284,7 @@ def Carrito_polera(request, id):
 
     Carrito.objects.create(producto = polera, cantidadProd = cant, totalProd = total, usuario = usuario)
 
-    messages.success(request, 'El Producto Ha Sido Agregado al Carrito')
+    messages.success(request, 'El Producto Ha Sido Agregado al ')
     return redirect('Poleras')
 
 def Carrito_pantalon(request, id):
@@ -297,13 +297,23 @@ def Carrito_pantalon(request, id):
 
     Carrito.objects.create(producto = pantalon, cantidadProd = cant, totalProd = total, usuario = usuario)
 
-    messages.success(request, 'El Producto Ha Sido Agregado al Carrito')
+    messages.success(request, 'El Producto Ha Sido Agregado al ')
     return redirect('Pantalones')
 
 def Ver_carrito(request):
     carrito = Carrito.objects.order_by('idCarrito')
+    suma = Carrito.objects.aggregate(Sum('totalProd'))
+
     contexto = {
-        "carrito":carrito
+        "carrito":carrito,
+        "suma":suma
     }
 
     return render(request, 'AmonStore/carrito.html', contexto)
+
+def Eliminar_prod_carrito(request, id):
+    carrito = Carrito.objects.get(idCarrito = id)
+    carrito.delete() #elimina el registro
+    messages.success(request,'Producto Eliminado Exitosamente')
+
+    return redirect('Ver_carrito')

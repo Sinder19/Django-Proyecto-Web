@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse, Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos, Administrar_prod, Administrar_usu, Eliminar_prod, Modificar_prod, Modificar, Eliminar_usu, Modificar_usu, Modificar_usuario, Agregar_prod, Agregar_producto, Ver_poleron, Ver_polera, Ver_pantalon, Carrito_poleron, Carrito_polera, Carrito_pantalon, Ver_carrito
+from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse, Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos, Administrar_prod, Administrar_usu, Eliminar_prod, Modificar_prod, Modificar, Eliminar_usu, Modificar_usu, Modificar_usuario, Agregar_prod, Agregar_producto, Ver_poleron, Ver_polera, Ver_pantalon, Carrito_poleron, Carrito_polera, Carrito_pantalon, Ver_carrito, Eliminar_prod_carrito
 
 urlpatterns = [
     path('', Home, name="Home"),
@@ -33,5 +33,6 @@ urlpatterns = [
     path('Carrito_poleron/<int:id>', Carrito_poleron, name="Carrito_poleron"),
     path('Carrito_polera/<int:id>', Carrito_polera, name="Carrito_polera"),
     path('Carrito_pantalon/<int:id>', Carrito_pantalon, name="Carrito_pantalon"),
-    path('Ver_carrito', Ver_carrito, name="Ver_carrito")    
+    path('Carrito', Ver_carrito, name="Ver_carrito"),
+    path('Eliminar_prod_carrito/<int:id>', Eliminar_prod_carrito, name="Eliminar_prod_carrito"),
 ]

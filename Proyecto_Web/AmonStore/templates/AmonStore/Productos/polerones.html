@@ -118,6 +118,17 @@
     <!--Polerones-->
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                {% if messages %}
+                <div>
+                    {% for i in messages %}
+                    <p style="color: green; font-size: 20px; background-color: #fff; text-align: center; padding-top: 10px; padding-bottom: 10px; border-radius: 20px;">{{ i }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
             {% for p in producto %}
             <div class="col-md-4 espacio_prod">
                 <div class="card">

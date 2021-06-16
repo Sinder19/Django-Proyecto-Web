@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.base import Model
-from django.db.models.deletion import CASCADE
+
 
 # Create your models here.
 class Region(models.Model):
@@ -13,7 +13,7 @@ class Region(models.Model):
 class Comuna(models.Model):
     idComuna = models.AutoField(primary_key=True, verbose_name="Id de la Comuna")
     nombreComuna = models.CharField(max_length=30, verbose_name="Nombre de la Comuna", blank=False, null=False)
-    region = models.ForeignKey(Region, on_delete=CASCADE)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.nombreComuna
@@ -32,7 +32,7 @@ class Usuario(models.Model):
     correoUsu = models.CharField(max_length=100, verbose_name="Correo del Usuario", blank=False, null=False)
     contrasenaUsu = models.CharField(max_length=50, verbose_name="Contraseña del Usuario", blank=False, null=False)
     telefonoUsu = models.IntegerField(verbose_name="Telefono del Usuario", blank=False, null=False)
-    tipousuario = models.ForeignKey(TipoUsuario, on_delete=CASCADE)
+    tipousuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.nombreUsu + " " + self.apellidoUsu
@@ -44,8 +44,8 @@ class Direccion(models.Model):
     blockDpto = models.CharField(max_length=5, verbose_name="Bloque del Departamento")
     numDpto = models.CharField(max_length=5, verbose_name="Número del Departamento")
     direccionDespacho = models.IntegerField(verbose_name="Corresponde a Direccion de Despacho", blank=False, null=False)
-    comuna = models.ForeignKey(Comuna, on_delete=CASCADE)
-    usuario = models.ForeignKey(Usuario, on_delete=CASCADE)
+    comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.descripcion + " #" + self.numDic
@@ -55,8 +55,8 @@ class Venta(models.Model):
     fechaVenta = models.DateField(verbose_name="Fecha de la Factura", blank=False, null=False)
     total = models.IntegerField(verbose_name= "Total de la Factura", blank=False, null=False)
     estado = models.IntegerField(verbose_name="Estado de la Factura", blank=False, null=False)
-    usuario = models.ForeignKey(Usuario, on_delete=CASCADE)
-    direccion = models.ForeignKey(Direccion, on_delete=CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
 
 
 class TipoProducto(models.Model):
@@ -73,7 +73,7 @@ class Producto(models.Model):
     descripcionProd = models.CharField(max_length=200, verbose_name="Descripcion del Producto", blank=False, null=False)
     fotoProd = models.ImageField(upload_to="productos", verbose_name="Foto", blank=False, null=False)
     stockProd = models.IntegerField(verbose_name= "Stock del Producto", blank=False, null=False)
-    tipoproducto = models.ForeignKey(TipoProducto, on_delete=CASCADE)
+    tipoproducto = models.ForeignKey(TipoProducto, on_delete=models.CASCADE)
     tallaProd = models.CharField(max_length=3, verbose_name="Talla del Producto", blank=False, null=False)
     colorProd = models.CharField(max_length=10, verbose_name="Color del Producto", blank=False, null=False)
 
@@ -83,9 +83,9 @@ class Producto(models.Model):
 class DetalleVenta(models.Model):
     idDetalle = models.AutoField(primary_key=True, verbose_name="Id del Detalle de la Venta")
     cantidadProd = models.IntegerField(verbose_name="Cantidad de Productos", blank=False, null=False)
-    venta = models.ForeignKey(Venta, on_delete=CASCADE)
+    venta = models.ForeignKey(Venta, on_delete=models.CASCADE)
     subTotalDet = models.IntegerField(verbose_name="Subtotal del Detalle", blank=False, null=False)
-    producto = models.ForeignKey(Producto, on_delete=CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
 
 class Contactanos(models.Model):
     idContac = models.AutoField(primary_key=True, verbose_name="Id del Contactanos")
@@ -100,6 +100,7 @@ class Contactanos(models.Model):
 
 class Carrito(models.Model):
     idCarrito = models.AutoField(primary_key=True, verbose_name="Id del Carrito")
-    producto = models.ForeignKey(Producto, on_delete=CASCADE)
     cantidadProd = models.IntegerField(verbose_name="Cantidad de Producto", blank=False, null=False)
-    usuario = models.ForeignKey(Usuario, on_delete=CASCADE)
+    totalProd = models.IntegerField(verbose_name="Total a Pagar", blank=False, null=False)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)    
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)

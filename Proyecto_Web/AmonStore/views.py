@@ -1,11 +1,11 @@
-from typing import ContextManager
 from django.contrib import messages
-from django.db import models
+from django.db.models.fields import IntegerField
 from django.shortcuts import render, redirect
 from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos, Carrito
 
 # Create your views here.
 def Home(request):
+
     return render(request, 'AmonStore/Home.html')
 
 def Quienes_somos(request):
@@ -102,8 +102,6 @@ def Inicio_sesion(request):
 def Olvidaste_clave(request):
     return render(request, 'AmonStore/olvidaste_clave.html')    
 
-def Carrito(request):
-    return render(request, 'AmonStore/carrito.html')
 
 def Administrar_prod(request):
     productos = Producto.objects.order_by('idProducto')
@@ -264,14 +262,48 @@ def Ver_pantalon(request, id):
 
     return render(request, 'AmonStore/Productos/detalle_pantalon.html', contexto)
 
-
 def Carrito_poleron(request, id):
     cant = request.POST['cantidad']
     
     poleron = Producto.objects.get(idProducto = id)
     usuario = Usuario.objects.get(rutUsu = '20832119-6')
 
-    Carrito.objects.create(producto = poleron, cantidadProd = cant, usuario = usuario)
+    total = int(cant) * int(poleron.precioProd)
+
+    Carrito.objects.create(cantidadProd = cant, totalProd = total, usuario = usuario, producto = poleron)
+    messages.success(request, 'El Producto Ha Sido Agregado al Carrito')
+    return redirect('Polerones')
+
+def Carrito_polera(request, id):
+    cant = request.POST['cantidad']
+    
+    polera = Producto.objects.get(idProducto = id)
+    usuario = Usuario.objects.get(rutUsu = '20832119-6')
+
+    total = int(cant) * int(polera.precioProd)
+
+    Carrito.objects.create(producto = polera, cantidadProd = cant, totalProd = total, usuario = usuario)
 
     messages.success(request, 'El Producto Ha Sido Agregado al Carrito')
-    return redirect('Ver_poleron')
+    return redirect('Poleras')
+
+def Carrito_pantalon(request, id):
+    cant = request.POST['cantidad']
+    
+    pantalon = Producto.objects.get(idProducto = id)
+    usuario = Usuario.objects.get(rutUsu = '20832119-6')
+
+    total = int(cant) * int(pantalon.precioProd)
+
+    Carrito.objects.create(producto = pantalon, cantidadProd = cant, totalProd = total, usuario = usuario)
+
+    messages.success(request, 'El Producto Ha Sido Agregado al Carrito')
+    return redirect('Pantalones')
+
+def Ver_carrito(request):
+    carrito = Carrito.objects.order_by('idCarrito')
+    contexto = {
+        "carrito":carrito
+    }
+
+    return render(request, 'AmonStore/carrito.html', contexto)

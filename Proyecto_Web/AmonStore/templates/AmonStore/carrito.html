@@ -103,22 +103,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for c in carrito %}
                         <tr>
-                            <td>1</td>
-                            <td><img src="{% static 'AmonStore/Imagenes/poleron1.jpg' %}" alt="" style="width: 100%; max-width: 150px;"></td>
-                            <td>Poleron Calvin Klein</td>
-                            <td>3</td>
-                            <td>$14.000</td>
-                            <td>$42.000</td>
+                            <td>{{ c.idCarrito }}</td>
+                            <td><img src="{{ c.producto.fotoProd.url }}" alt="" style="width: 100%; max-width: 150px;"></td>
+                            <td>{{ c.producto.tipoproducto.descripcion }} {{ c.producto.nombreProd }}</td>
+                            <td>{{ c.cantidadProd }}</td>
+                            <td>${{ c.producto.precioProd }}</td>
+                            <td>${{ c.totalProd }}</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><img src="{% static 'AmonStore/Imagenes/polera1.jpg' %}" alt=""  style="width: 100%; max-width: 150px;"></td>
-                            <td>Poleron Jordan</td>
-                            <td>4</td>
-                            <td>$7.500</td>
-                            <td>$30.000</td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

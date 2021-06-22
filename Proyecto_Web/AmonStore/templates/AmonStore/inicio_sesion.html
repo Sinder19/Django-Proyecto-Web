@@ -84,6 +84,7 @@
                     ofertas y participar de futuros
                     sorteos que realice la página</p>
                 <form action="#" method="POST" name="inicio_sesion" id="inicio_sesion">
+                    {% csrf_token %}
                     <!--Ingresar Correo Electronico-->
                     <div class="form-group">
                         <input type="email" class="form-control borde_input" id="email" name="email"

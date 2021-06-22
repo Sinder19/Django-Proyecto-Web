@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +24,8 @@
 <body>
     <!--Inicio Barra Menu-->
     <nav class="navbar navbar-expand-lg bg-light" style="padding-top: 0; padding-bottom: 0;">
-        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}" alt="Logo" width="50px"></a>
+        <a class="navbar-brand" href="{% url 'Home' %}"><img src="{% static 'AmonStore/Imagenes/logo 2.png' %}"
+                alt="Logo" width="50px"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
                 viewBox="0 0 16 16">
@@ -41,7 +43,8 @@
                     <a class="nav-link color_letra padding_navbar" href="{% url 'Quienes_somos' %}">¿Quiénes somos?</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
                         Productos
                     </a>
                     <div class="dropdown-menu">
@@ -51,10 +54,12 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link color_letra padding_navbar" href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
+                    <a class="nav-link color_letra padding_navbar"
+                        href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                        data-toggle="dropdown">
                         Admin
                     </a>
                     <div class="dropdown-menu">

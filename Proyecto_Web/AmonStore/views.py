@@ -2,6 +2,10 @@ from django.contrib import messages
 from django.db.models import Sum
 from django.shortcuts import render, redirect
 from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos, Carrito
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout 
+
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 def Home(request):
@@ -89,7 +93,8 @@ def Ingresar_usuario(request):
         opcionDespacho = 2
     
     Usuario.objects.create(rutUsu = rut, nombreUsu = nombre, apellidoUsu = apellido, correoUsu = correo, contrasenaUsu = contrasenia, telefonoUsu = telefono, tipousuario = tipoUsu)
-    
+    User.objects.create_user(id = int(rut), username = correo, password = contrasenia, first_name = nombre, last_name = apellido, email = correo, is_staff = 0)
+
     usu = Usuario.objects.get(rutUsu = rut)
     Direccion.objects.create(descripcion = direccion, numDic =num_direc, blockDpto = block, numDpto = num_dpto, direccionDespacho = opcionDespacho, comuna = com, usuario = usu)
 
@@ -195,7 +200,9 @@ def Administrar_usu(request):
 
 def Eliminar_usu(request, rut):
     usuarios = Usuario.objects.get(rutUsu = rut)
+    usu = User.objects.get(id = rut)
     usuarios.delete() #elimina el registro
+    usu.delete()
     messages.success(request,'Usuario Eliminado con Exito')
 
     return redirect('Administrar_usu')
@@ -220,27 +227,37 @@ def Modificar_usuario(request):
     tipousuario = request.POST['tipousuario']
 
     usuario = Usuario.objects.get(rutUsu = rutUsu)
+    usu = User.objects.get(id = int(rutUsu))
 
     if usuario.nombreUsu != nombreUsu:
         usuario.nombreUsu = nombreUsu
+        usu.first_name = nombreUsu
 
     if usuario.apellidoUsu != apellidoUsu:
         usuario.apellidoUsu = apellidoUsu
+        usu.last_name = apellidoUsu
 
     if usuario.correoUsu != correoUsu:
         usuario.correoUsu = correoUsu
+        usu.email = correoUsu
 
     if usuario.contrasenaUsu != contrasenaUsu:
         usuario.contrasenaUsu = contrasenaUsu
+        usu.password = make_password(contrasenaUsu)
         
     if usuario.telefonoUsu != telefonoUsu:
         usuario.telefonoUsu = telefonoUsu
     
     tipousuario2 = TipoUsuario.objects.get(idTipoUsu = tipousuario)
+    if tipousuario2.idTipoUsu == 1:
+        usu.is_staff = 1
+    if tipousuario2.idTipoUsu == 2:
+        usu.is_staff = 0
     if usuario.tipousuario != tipousuario2:
         usuario.tipousuario = tipousuario2
     
     usuario.save()
+    usu.save()
     messages.success(request, 'Usuario Modificado')
     return redirect('Administrar_usu')
     
@@ -266,7 +283,7 @@ def Carrito_poleron(request, id):
     cant = request.POST['cantidad']
     
     poleron = Producto.objects.get(idProducto = id)
-    usuario = Usuario.objects.get(rutUsu = '20832119-6')
+    usuario = Usuario.objects.get(rutUsu = '208321196')
 
     total = int(cant) * int(poleron.precioProd)
 
@@ -278,7 +295,7 @@ def Carrito_polera(request, id):
     cant = request.POST['cantidad']
     
     polera = Producto.objects.get(idProducto = id)
-    usuario = Usuario.objects.get(rutUsu = '20832119-6')
+    usuario = Usuario.objects.get(rutUsu = '208321196')
 
     total = int(cant) * int(polera.precioProd)
 
@@ -291,7 +308,7 @@ def Carrito_pantalon(request, id):
     cant = request.POST['cantidad']
     
     pantalon = Producto.objects.get(idProducto = id)
-    usuario = Usuario.objects.get(rutUsu = '20832119-6')
+    usuario = Usuario.objects.get(rutUsu = '208321196')
 
     total = int(cant) * int(pantalon.precioProd)
 
@@ -317,3 +334,31 @@ def Eliminar_prod_carrito(request, id):
     messages.success(request,'Producto Eliminado Exitosamente')
 
     return redirect('Ver_carrito')
+
+
+
+
+def login_view(request):
+    u = request.POST['username']
+    c = request.POST['password']
+
+    user = authenticate(username = u, password = c)
+
+    if user is not None:
+        if user.is_active:
+            login(request,user)
+            return redirect('Home')
+        else:
+            messages.error(request,'Usuario Inactivo')
+    else:
+        messages.error(request,'Usuario y/o contraseña incorrecta')
+    
+    return redirect('InicioSesion')
+
+def logout_view(request):
+
+    logout(request)
+    return redirect('Home')
+
+def Mi_perfil(request):
+    return render(request, 'AmonStore/Mi_perfil.html')

@@ -83,6 +83,13 @@
                 <p class="texto_is" style="margin-bottom: 30px;">Inicia sesión para poder realizar compras, obtener
                     ofertas y participar de futuros
                     sorteos que realice la página</p>
+                {% if messages %}
+                <div>
+                    {% for i in messages %}
+                    <p style="color: green; margin-left: 15px; font-size: 20px;">{{ i }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <form action="{% url 'Sesion' %}" method="POST" name="inicio_sesion" id="inicio_sesion">
                     {% csrf_token %}
                     <!--Ingresar Correo Electronico-->

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse, Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos, Administrar_prod, Administrar_usu, Eliminar_prod, Modificar_prod, Modificar, Eliminar_usu, Modificar_usu, Modificar_usuario, Agregar_prod, Agregar_producto, Ver_poleron, Ver_polera, Ver_pantalon, Carrito_poleron, Carrito_polera, Carrito_pantalon, Ver_carrito, Eliminar_prod_carrito, login_view, logout_view, Mi_perfil
+from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse, Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos, Administrar_prod, Administrar_usu, Eliminar_prod, Modificar_prod, Modificar, Eliminar_usu, Modificar_usu, Modificar_usuario, Agregar_prod, Agregar_producto, Ver_poleron, Ver_polera, Ver_pantalon, Carrito_poleron, Carrito_polera, Carrito_pantalon, Ver_carrito, Eliminar_prod_carrito, login_view, logout_view, Mi_perfil, Modificar_usuario_Miperfil
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required
 
@@ -38,6 +38,7 @@ urlpatterns = [
     path('Carrito', login_required(Ver_carrito), name="Ver_carrito"),
     path('Eliminar_prod_carrito/<int:id>', login_required(Eliminar_prod_carrito), name="Eliminar_prod_carrito"),
     path('Mi_perfil', login_required(Mi_perfil), name="Mi_perfil"),
+    path('Modificar_MiPerfil', Modificar_usuario_Miperfil, name="Modificar_usuario_Miperfil"),
 
     path('InicioSesion/', LoginView.as_view(template_name='AmonStore/inicio_sesion.html'), name="InicioSesion"),
     path('Sesion', login_view, name="Sesion"),

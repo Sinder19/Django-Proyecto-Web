@@ -335,9 +335,6 @@ def Eliminar_prod_carrito(request, id):
 
     return redirect('Ver_carrito')
 
-
-
-
 def login_view(request):
     u = request.POST['username']
     c = request.POST['password']
@@ -352,7 +349,7 @@ def login_view(request):
             messages.error(request,'Usuario Inactivo')
     else:
         messages.error(request,'Usuario y/o contraseña incorrecta')
-    
+
     return redirect('InicioSesion')
 
 def logout_view(request):
@@ -361,4 +358,47 @@ def logout_view(request):
     return redirect('Home')
 
 def Mi_perfil(request):
-    return render(request, 'AmonStore/Mi_perfil.html')
+    usuario = Usuario.objects.get(rutUsu = '208321196')
+    contexto = {
+        "usuario": usuario
+    }
+    return render(request, 'AmonStore/Mi_perfil.html', contexto)
+
+def Modificar_usuario_Miperfil(request):
+    rutUsu = request.POST['rutUsu']
+    nombreUsu = request.POST['nombreUsu']
+    apellidoUsu = request.POST['apellidoUsu']
+    correoUsu = request.POST['correoUsu']
+    contrasenaUsu = request.POST['contrasenaUsu1']
+    telefonoUsu = request.POST['telefonoUsu']
+
+    usuario = Usuario.objects.get(rutUsu = rutUsu)
+    usu = User.objects.get(id = int(rutUsu))
+
+    if usuario.nombreUsu != nombreUsu:
+        usuario.nombreUsu = nombreUsu
+        usu.first_name = nombreUsu
+
+    if usuario.apellidoUsu != apellidoUsu:
+        usuario.apellidoUsu = apellidoUsu
+        usu.last_name = apellidoUsu
+
+    if usuario.correoUsu != correoUsu:
+        usuario.correoUsu = correoUsu
+        usu.email = correoUsu
+    
+    if usuario.telefonoUsu != telefonoUsu:
+        usuario.telefonoUsu = telefonoUsu
+
+    mensaje = 'Usuario Modificado'
+
+    if usuario.contrasenaUsu != contrasenaUsu:
+        usuario.contrasenaUsu = contrasenaUsu
+        usu.password = make_password(contrasenaUsu)
+        mensaje = mensaje + ', Por favor vuelve a iniciar sesion con tu nueva contraseña'
+        
+        
+    usuario.save()
+    usu.save()
+    messages.success(request, mensaje)
+    return redirect('Mi_perfil')

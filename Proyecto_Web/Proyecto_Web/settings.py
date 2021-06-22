@@ -136,3 +136,5 @@ MEDIA_URL =  '/Media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
 LOGIN_REDIRECT_URL = 'Home'
+
+LOGIN_URL ='Inicio_sesion'

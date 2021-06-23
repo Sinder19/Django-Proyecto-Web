@@ -57,11 +57,24 @@
                     <a class="nav-link color_letra padding_navbar"
                         href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
+                {% if user.is_authenticated and user.is_staff %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle padding_navbar color_letra2" href="#" id="navbardrop"
+                        data-toggle="dropdown">
+                        Admin
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
+                        <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
+                    </div>
+                </li>
+                {% else %}
+                {% endif %}
             </ul>
             <!--Registrarse / Iniciar Sesion-->
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item dropdown" style="margin-right: 80px;">
-                    <a class="nav-link dropdown-toggle color_letra2" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle item_select" href="#" id="navbardrop" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                             class="bi bi-person-square" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -149,7 +162,11 @@
                             <td></td>
                             <td></td>
                             <td>TOTAL A PAGAR</td>
+                            {% if x == 0 %}
+                            <td>${{ suma }}</td>
+                            {% else %}
                             <td>${{ suma.totalProd__sum }}</td>
+                            {% endif %}
                         </tr>
                     </tbody>
                 </table>

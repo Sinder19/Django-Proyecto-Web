@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.shortcuts import render, redirect
 from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos, Carrito
 from django.contrib.auth.models import User
@@ -281,9 +281,8 @@ def Ver_pantalon(request, id):
 
 def Carrito_poleron(request, id):
     cant = request.POST['cantidad']
-    
     poleron = Producto.objects.get(idProducto = id)
-    usuario = Usuario.objects.get(rutUsu = '208321196')
+    usuario = Usuario.objects.get(rutUsu = request.user.id)
 
     total = int(cant) * int(poleron.precioProd)
 
@@ -295,7 +294,7 @@ def Carrito_polera(request, id):
     cant = request.POST['cantidad']
     
     polera = Producto.objects.get(idProducto = id)
-    usuario = Usuario.objects.get(rutUsu = '208321196')
+    usuario = Usuario.objects.get(rutUsu = request.user.id)
 
     total = int(cant) * int(polera.precioProd)
 
@@ -308,7 +307,7 @@ def Carrito_pantalon(request, id):
     cant = request.POST['cantidad']
     
     pantalon = Producto.objects.get(idProducto = id)
-    usuario = Usuario.objects.get(rutUsu = '208321196')
+    usuario = Usuario.objects.get(rutUsu = request.user.id)
 
     total = int(cant) * int(pantalon.precioProd)
 
@@ -318,12 +317,22 @@ def Carrito_pantalon(request, id):
     return redirect('Pantalones')
 
 def Ver_carrito(request):
-    carrito = Carrito.objects.order_by('idCarrito')
-    suma = Carrito.objects.aggregate(Sum('totalProd'))
+    usuario2 = Usuario.objects.get(rutUsu = request.user.id)
+    carrito = Carrito.objects.filter(usuario = usuario2)
+    
+    suma2 = Carrito.objects.filter(usuario = usuario2).count()
+    
+    if suma2 == 0:
+        suma = 0
+        x = 0
+    else:
+        suma = Carrito.objects.filter(usuario = usuario2).aggregate(Sum('totalProd'))
+        x = 1
 
     contexto = {
         "carrito":carrito,
-        "suma":suma
+        "suma":suma,
+        "x": x,
     }
 
     return render(request, 'AmonStore/carrito.html', contexto)
@@ -358,7 +367,7 @@ def logout_view(request):
     return redirect('Home')
 
 def Mi_perfil(request):
-    usuario = Usuario.objects.get(rutUsu = '208321196')
+    usuario = Usuario.objects.get(rutUsu = request.user.id)
     contexto = {
         "usuario": usuario
     }

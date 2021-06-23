@@ -19,28 +19,6 @@
     <link type="text/css" rel="stylesheet" href="{% static 'AmonStore/Css/estilos.css' %}">
     <!--Importe de los iconos para las redes sociales-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!--Validacion contraseñas iguales-->
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("#error").hide();
-            $("#modificar").submit(function () {
-                var mensaje = "Por favor revisar los siguientes detalles en el formulario: ";
-
-                if ($("#contrasenaUsu").val() != $("#contrasenaUsu1").val()) {
-                    mensaje = mensaje + "<br>Las contraseñas deben ser iguales";
-                }
-                if (isNaN($("#telefonoUsu").val())) {
-                    mensaje = mensaje + "<br>El teléfono solo puede ser números";
-                }
-                if (mensaje != "Por favor revisar los siguientes detalles en el formulario: ") {
-                    $("#error").html(mensaje); //mostrando el texto de la variable en el div del html
-                    $("#error").show(); //hace visible el div
-                    event.preventDefault(); //evita que los datos del formulario se envie
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -182,9 +160,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" style="margin-left: 10px;">
-                        <label for="contrasenaUsu" style="font-size: 20px; margin-top: 10px;">Contraseña Usuario</label>
-                        <input type="password" name="contrasenaUsu" id="contrasenaUsu" class="form-control"
-                            value="{{ usuarios.contrasenaUsu }}" style="margin-bottom: 10px;" required readonly>
+                        <label for="correoUsu" style="font-size: 20px; margin-top: 10px;">Correo Usuario</label>
+                        <input type="text" name="correoUsu" id="correoUsu" class="form-control"
+                            value="{{ usuarios.correoUsu }}" style="margin-bottom: 10px;" required readonly>
                     </div>
                 </div>
             </div>
@@ -198,34 +176,18 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" style="margin-left: 10px;">
-                        <label for="contrasenaUsu1" style="font-size: 20px; margin-top: 10px;">Repetir Contraseña Usuario</label>
-                        <input type="password" name="contrasenaUsu1" id="contrasenaUsu1" class="form-control"
-                            value="{{ usuarios.contrasenaUsu }}" style="margin-bottom: 10px;" required readonly>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group" style="margin-left: 10px;">
                         <label for="apellidoUsu" style="font-size: 20px; margin-top: 10px;">Apellido Usuario</label>
                         <input type="text" name="apellidoUsu" id="apellidoUsu" class="form-control"
                             value="{{ usuarios.apellidoUsu }}" style="margin-bottom: 10px;" required readonly>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group" style="margin-left: 10px;">
                         <label for="telefonoUsu" style="font-size: 20px; margin-top: 10px;">Telefono Usuario</label>
                         <input type="text" name="telefonoUsu" id="telefonoUsu" class="form-control"
                             value="{{ usuarios.telefonoUsu }}" style="margin-bottom: 10px;" required readonly>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group" style="margin-left: 10px;">
-                        <label for="correoUsu" style="font-size: 20px; margin-top: 10px;">Correo Usuario</label>
-                        <input type="text" name="correoUsu" id="correoUsu" class="form-control"
-                            value="{{ usuarios.correoUsu }}" style="margin-bottom: 10px;" required readonly>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -243,9 +205,6 @@
                         </select>
                     </div>
                 </div>
-            </div> 
-            <div class="form-group">
-                <div id="error" class="alert alert-danger"></div>
             </div>
             <div class="row" style="margin-top: 10px; padding-bottom: 10px;">
                 <div class="col-md-2"></div>

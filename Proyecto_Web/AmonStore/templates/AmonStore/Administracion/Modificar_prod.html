@@ -66,6 +66,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
                         <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
+                        <a class="dropdown-item" href="{% url 'Administrar_men' %}">Administrar Mensajes</a>
                     </div>
                 </li>
                 {% else %}
@@ -241,8 +242,7 @@
                     </div>
                     <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">
                         <div class="col-md-12">
-                            <p><a href="{% url 'Modificar' %}"><button class="comprar">Modificar Producto</button></a>
-                            </p>
+                            <p><button type="submit" class="comprar">Modificar Producto</button></p>
                         </div>
                     </div>
                 </div>

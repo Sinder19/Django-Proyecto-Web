@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse, Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos, Administrar_prod, Administrar_usu, Eliminar_prod, Modificar_prod, Modificar, Eliminar_usu, Modificar_usu, Modificar_usuario, Agregar_prod, Agregar_producto, Ver_poleron, Ver_polera, Ver_pantalon, Carrito_poleron, Carrito_polera, Carrito_pantalon, Ver_carrito, Eliminar_prod_carrito, login_view, logout_view, Mi_perfil, Modificar_usuario_Miperfil
+from .views import Home, Quienes_somos, Polerones, Poleras, Pantalones, Contactanos_mensaje, Registrarse, Ingresar_usuario, Inicio_sesion, Olvidaste_clave, Buscar_polerones, Buscar_poleras, Buscar_pantalones, Enviar_contactanos, Administrar_prod, Administrar_usu, Eliminar_prod, Modificar_prod, Modificar, Eliminar_usu, Modificar_usu, Modificar_usuario, Agregar_prod, Agregar_producto, Ver_poleron, Ver_polera, Ver_pantalon, Carrito_poleron, Carrito_polera, Carrito_pantalon, Ver_carrito, Eliminar_prod_carrito, login_view, logout_view, Mi_perfil, Modificar_usuario_Miperfil, Administrar_men, Modificar_men, Modificar_mensaje, Eliminar_men
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required
 
@@ -12,6 +12,10 @@ urlpatterns = [
     path('Pantalones', Pantalones, name="Pantalones"),
     path('Contactanos_mensaje', Contactanos_mensaje, name="Contactanos_mensaje"),
     path('Enviar_contactanos', Enviar_contactanos, name="Enviar_contactanos"),
+    path('Administrar_men', login_required(Administrar_men), name="Administrar_men"),
+    path('Modificar_men/<int:id>', login_required(Modificar_men), name="Modificar_men"),
+    path('Modificar_mensaje', login_required(Modificar_mensaje), name="Modificar_mensaje"),
+    path('Eliminar_men/<int:id>', login_required(Eliminar_men), name="Eliminar_men"),
     path('Registrarse', Registrarse, name="Registrarse"),
     path('Ingresar_usuario', Ingresar_usuario, name="Ingresar_usuario"),
     path('Inicio_sesion', Inicio_sesion, name="Inicio_sesion"),

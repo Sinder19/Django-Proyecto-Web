@@ -6,7 +6,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polerones</title>
+    <title>Modificar Mensaje</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
     <!--Boostrap4-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,6 +24,35 @@
     <!--Importe de los iconos para las redes sociales-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#error").hide(); //ocultando el div de los errores
+
+            //Indicar que las validaciones del formulario se ejecutaran solo cuando se
+            //presione el submit
+            $("#formulario_contacto").submit(function () {
+                var mensaje = "Por favor revisar los siguientes detalles en el formulario: ";
+
+                if ($("#nombre_completo").val().trim().length == 0) {
+                    mensaje = mensaje + "<br>El nombre no debe estar vacío";
+                }
+                if ($("#correo").val().trim().length == 0) {
+                    mensaje = mensaje + "<br>El correo electrónico no debe estar vacío";
+                }
+                if ($("#asunto").val().trim().length == 0) {
+                    mensaje = mensaje + "<br>El asunto no debe estar vacío";
+                }
+                if ($("#comentario").val().trim().length == 0) {
+                    mensaje = mensaje + "<br>El comentario no debe estar vacío";
+                }
+                if (mensaje != "Por favor revisar los siguientes detalles en el formulario: ") {
+                    $("#error").html(mensaje); //mostrando el texto de la variable en el div del html
+                    $("#error").show(); //hace visible el div
+                    event.preventDefault(); //evita que los datos del formulario se envie
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -44,11 +77,12 @@
                     <a class="nav-link color_letra padding_navbar" href="{% url 'Quienes_somos' %}">¿Quiénes somos?</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
                         data-toggle="dropdown">
-                        Polerones
+                        Productos
                     </a>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'Polerones' %}">Polerones</a>
                         <a class="dropdown-item" href="{% url 'Poleras' %}">Poleras</a>
                         <a class="dropdown-item" href="{% url 'Pantalones' %}">Pantalones</a>
                     </div>
@@ -59,9 +93,9 @@
                 </li>
                 {% if user.is_authenticated and user.is_staff %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
+                    <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
                         data-toggle="dropdown">
-                        Admin
+                        Modificar Mensaje
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
@@ -142,114 +176,82 @@
     </nav>
     <!--Fin Barra Menu-->
 
-    <!--Buscar-->
-    <form action="{% url 'Buscar_polerones' %}" method="POST" name="buscar_poleron" id="buscar_poleron">
-        {% csrf_token %}
-        <div class="container">
-            <div class="row">
-                <input class="form-control mr-sm-2 buscar" name="buscar" type="text" placeholder="Ingresar Producto"
-                    style="margin-top: 1rem; margin-bottom: 1rem;" required>
-                <button class="btn btn-primary"
-                    style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
-                    type="submit">Buscar</button>
-                <a href="{% url 'Polerones' %}"><button class="btn btn-primary"
-                        style="margin-left: 5px; border: #005BBC solid 1px; margin-top: 1rem; margin-bottom: 1rem;"
-                        type="button">Borrar Filtro</button></a>
-            </div>
-        </div>
-    </form>
-
-    <!--Polerones-->
-    <div class="container">
+    <!--Inicio Formulario-->
+    <div class="container espaciado_superior">
         <div class="row">
-            <div class="col-md-12">
-                {% if messages %}
-                <div>
-                    {% for i in messages %}
-                    <p
-                        style="color: green; font-size: 20px; background-color: #fff; text-align: center; padding-top: 10px; padding-bottom: 10px; border-radius: 20px;">
-                        {{ i }}
-                        <a style="color: #013009; font-size: 20px; background-color: #fff; text-align: center; padding-top: 10px; padding-bottom: 10px; border-radius: 20px;"
-                            href="{% url 'Ver_carrito' %}">Carrito
-                        </a>
-                    </p>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        <div class="row">
-            {% for p in producto %}
-            <div class="col-md-4 espacio_prod">
-                <div class="card">
-                    <div class="card">
-                        <img src="{{ p.fotoProd.url }}" alt="{{ p.fotoProd }}" style="width: 100%;">
-                        <h1>Polerón</h1>
-                        <h1>{{ p.nombreProd }}</h1>
-                        <p class="price">${{ p.precioProd }}</p>
-                        <p>{{ p.descripcionProd }}</p>
-                        <p><a href="{% url 'Ver_poleron' p.idProducto %}"><button>Añadir al carrito</button></a></p>
+            <div class="col-md-1"></div>
+            <div class="col-md-10" style="background-color: #fff; border: black solid 1px;">
+                <h1 style="padding-top: 10px; margin-bottom: 30px;">Comunícate con Nosotros</h1>
+                <form action="{% url 'Modificar_mensaje' %}" method="POST" name="formulario_contacto"
+                    id="formulario_contacto">
+                    {% csrf_token %}
+                    {% if messages %}
+                    <div>
+                        {% for i in messages %}
+                        <p style="color: green;">{{ i }}</p>
+                        {% endfor %}
                     </div>
-                </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="correo">Id del Mensaje</label>
+                                <input type="number" class="form-control espacios_input" name="id_men" id="id_men"
+                                    value="{{ mensaje.idContac }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nombre_completo">Estado del Mensaje</label>
+                                <select name="tipo_men" id="tipo_men" class="form-control"
+                                    style="width: 150px; margin-bottom: 10px;">
+                                    {% for t in tipo %}
+                                    {% if t.idTipo == mensaje.mensajevisto.idTipo %}
+                                    <option value="{{ t.idTipo }}" selected>{{ t.descripcion }}</option>
+                                    {% else %}
+                                    <option value="{{ t.idTipo }}">{{ t.descripcion }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre_completo">Nombre Completo</label>
+                        <input type="text" class="form-control espacios_input" name="nombre_completo"
+                            id="nombre_completo" placeholder="Ingrese su nombre" value="{{ mensaje.nombre }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo Eletrónico</label>
+                        <input type="email" class="form-control espacios_input" name="correo" id="correo"
+                            placeholder="ejemplo@ejemplo.com" value="{{ mensaje.correo }}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="asunto">Asunto</label>
+                        <input type="text" class="form-control espacios_input" name="asunto" id="asunto"
+                            value="{{ mensaje.asunto }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="comentario">Comentarios</label>
+                        <textarea class="form-control espacios_input" id="comentario" name="comentario" rows="5"
+                            readonly>{{ mensaje.comentario }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <div id="error" class="alert alert-danger"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <p><button type="submit" class="comprar">Modificar Mensaje</button></p>
+                    </div>
+                </form>
             </div>
-            {% endfor %}
+            <div class="col-md-1"></div>
         </div>
     </div>
-    <!--Fin Polerones-->
 
-    <!--Inicio Pie de Página-->
-    <footer class="bg-light text-center text-lg-start" style="margin-top: 50px;">
-        <div class="container-fluid p-3">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5 class="text-uppercase">Horarios de Atención</h5>
-
-                    <ul class="list-unstyled mb-0" style="line-height: 1;">
-                        <li>
-                            <p class="text-dark">Lunes: 10:00 a 20:00</p>
-                        </li>
-                        <li>
-                            <p class="text-dark">Martes: 10:00 a 20:00</p>
-                        </li>
-                        <li>
-                            <p class="text-dark">Miércoles: 10:00 a 20:00</p>
-                        </li>
-                        <li>
-                            <p class="text-dark">Jueves: 10:00 a 20:00</p>
-                        </li>
-                        <li>
-                            <p class="text-dark">Viernes: 10:00 a 20:00</p>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-md-4">
-                    <h5 class="text-uppercase mb-0" style="padding-bottom: 10px;">Redes Sociales</h5>
-
-                    <ul class="list-unstyled lados_pie_pag">
-                        <p>
-                            <a href="https://www.instagram.com/amon.store._/?hl=es" class="fa fa-instagram"></a>
-                            <a href="#" class="fa fa-facebook"></a>
-                        </p>
-                    </ul>
-                </div>
-
-                <div class="col-md-4">
-                    <h5 class="text-uppercase">Contáctanos</h5>
-
-                    <ul class="list-unstyled mb-0" style="line-height: 1;">
-                        <li>
-                            <p>Telefono: +56 9 4998 3478</p>
-                        </li>
-                        <li>
-                            <p>Correo Electrónico: a.gonzalez3@duocuc.cl</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!--Fin Pie de Página-->
 </body>
 
 </html>

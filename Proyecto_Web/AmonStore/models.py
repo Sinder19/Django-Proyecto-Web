@@ -87,13 +87,17 @@ class DetalleVenta(models.Model):
     subTotalDet = models.IntegerField(verbose_name="Subtotal del Detalle", blank=False, null=False)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
 
+class MensajeVisto(models.Model):
+    idTipo = models.AutoField(primary_key= True, verbose_name="Id del tipo de visto")
+    descripcion = models.CharField(max_length=30, verbose_name="Descripcion del tipo de visto", blank=False, null=False)
+
 class Contactanos(models.Model):
     idContac = models.AutoField(primary_key=True, verbose_name="Id del Contactanos")
     nombre = models.CharField(max_length=100, verbose_name="Nombre del Usuario", blank=False, null=False)
     correo = models.CharField(max_length=100, verbose_name="Correo del Usuario", blank=False, null=False)
     asunto = models.CharField(max_length=50, verbose_name="Asunto del Contactanos", blank=False, null=False)
     comentario = models.CharField(max_length=500, verbose_name="Comentario del Contactanos", blank=False, null=False)
-    visto = models.IntegerField(verbose_name="El Mensaje fue Leído", blank=False, null=False)
+    mensajevisto = models.ForeignKey(MensajeVisto, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.nombre

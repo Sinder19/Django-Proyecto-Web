@@ -99,6 +99,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
                         <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
+                        <a class="dropdown-item" href="{% url 'Administrar_men' %}">Administrar Mensajes</a>
                     </div>
                 </li>
                 {% else %}
@@ -194,13 +195,13 @@
                     <div class="form-group">
                         <label for="nombre_completo">Nombre Completo</label>
                         <input type="text" class="form-control espacios_input" name="nombre_completo"
-                            id="nombre_completo" placeholder="Ingrese su nombre">
+                            id="nombre_completo" placeholder="Ingrese su nombre" value="{{ user.first_name }} {{ user.last_name }}">
                     </div>
 
                     <div class="form-group">
                         <label for="correo">Correo Eletrónico</label>
                         <input type="email" class="form-control espacios_input" name="correo" id="correo"
-                            placeholder="ejemplo@ejemplo.com">
+                            placeholder="ejemplo@ejemplo.com" value="{{ user.email }}">
                     </div>
 
                     <div class="form-group">

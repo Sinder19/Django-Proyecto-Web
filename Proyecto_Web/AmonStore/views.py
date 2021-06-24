@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.db.models import Sum, Count
 from django.shortcuts import render, redirect
-from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos, Carrito
+from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos, Carrito, MensajeVisto
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout 
 
@@ -56,10 +56,48 @@ def Enviar_contactanos(request):
     correo = request.POST['correo']
     asunto = request.POST['asunto']
     comentario = request.POST['comentario']
+    
+    mensajevisto2 = MensajeVisto.objects.get(idTipo = 2)
 
-    Contactanos.objects.create(nombre = nombre, correo = correo, asunto = asunto, comentario = comentario, visto = 2)
+    Contactanos.objects.create(nombre = nombre, correo = correo, asunto = asunto, comentario = comentario, mensajevisto = mensajevisto2)
     messages.success(request, 'El mensaje ha sido enviado con exito')
     return redirect('Contactanos_mensaje')
+
+def Administrar_men(request):
+    mensaje = Contactanos.objects.order_by('idContac')
+    contexto ={
+        "mensaje":mensaje,
+    }
+    return render(request, 'AmonStore/Administracion/Administrar_mensajes.html', contexto)
+
+def Modificar_men(request, id):
+    mensaje = Contactanos.objects.get(idContac = id)
+    tipo = MensajeVisto.objects.all()
+
+    contexto ={
+        "mensaje":mensaje,
+        "tipo":tipo
+    }
+    return render(request, 'AmonStore/Administracion/Modificar_men.html', contexto)
+
+def Modificar_mensaje(request):
+    tipo = request.POST['tipo_men']
+    id_men = request.POST['id_men']
+
+    mensaje = Contactanos.objects.get(idContac = id_men)
+    tipo2 = MensajeVisto.objects.get(idTipo = tipo)
+
+    mensaje.mensajevisto = tipo2
+    mensaje.save()
+    
+    messages.success(request, 'Mensaje Modificado')
+    return redirect('Administrar_men')
+
+def Eliminar_men(request, id):
+    mensaje = Contactanos.objects.get(idContac = id)
+    mensaje.delete()
+    messages.success(request, 'El Mensaje Ha Sido Eliminado')
+    return redirect('Administrar_men')
 
 def Registrarse(request):
     regiones = Region.objects.all()
@@ -165,7 +203,6 @@ def Modificar(request):
     if producto.tipoproducto != tipo_prod2:
         producto.tipoproducto = tipo_prod2
     
-    producto.fotoProd = foto
 
     producto.save()
     messages.success(request, 'Producto Modificado')

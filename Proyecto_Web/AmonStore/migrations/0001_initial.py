@@ -27,7 +27,6 @@ class Migration(migrations.Migration):
                 ('correo', models.CharField(max_length=100, verbose_name='Correo del Usuario')),
                 ('asunto', models.CharField(max_length=50, verbose_name='Asunto del Contactanos')),
                 ('comentario', models.CharField(max_length=500, verbose_name='Comentario del Contactanos')),
-                ('visto', models.IntegerField(verbose_name='El Mensaje fue Leído')),
             ],
         ),
         migrations.CreateModel(

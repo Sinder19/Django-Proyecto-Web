@@ -139,6 +139,7 @@ def Modificar(request):
     tipo_prod = request.POST['tipo_prod']
     talla = request.POST['talla']
     color = request.POST['color']
+    foto = request.FILES['foto']
 
     producto = Producto.objects.get(idProducto = id)
     
@@ -164,6 +165,8 @@ def Modificar(request):
     if producto.tipoproducto != tipo_prod2:
         producto.tipoproducto = tipo_prod2
     
+    producto.fotoProd = foto
+
     producto.save()
     messages.success(request, 'Producto Modificado')
     return redirect('Administrar_prod')

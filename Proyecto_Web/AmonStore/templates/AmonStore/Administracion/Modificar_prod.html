@@ -143,7 +143,7 @@
 
     <!--Inicio Modificar Producto-->
     <div class="container" style="background-color: #fff; border-radius: 10px;">
-        <form action="{% url 'Modificar' %}" method="POST">
+        <form action="{% url 'Modificar' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row" style="margin-top: 30px; border-bottom: 1px solid #E1E8EE;">
                 <div class="col-md-12">
@@ -228,6 +228,15 @@
                         <div class="col-md-8">
                             <input type="text" name="color" class="form-control"
                                 style="width: 100px; margin-bottom: 10px;" value="{{ producto.colorProd }}" required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; border-bottom: 1px solid #E1E8EE;">
+                        <div class="col-md-4">
+                            <h4>Actualizar Foto</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="file" name="foto"
+                                style="margin-bottom: 10px;" value="{{ producto.idProducto }}">
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">

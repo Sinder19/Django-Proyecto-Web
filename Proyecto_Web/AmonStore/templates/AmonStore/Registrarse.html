@@ -22,7 +22,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("#error").hide(); //ocultando el div de los errores
             $("#block").hide();
             $("#num_depto").hide();
@@ -180,12 +180,50 @@
                             <!--Ingresar Contraseña-->
                             <div class="form-group">
                                 <label class="texto_datos" for="contrasenia">Contraseña</label>
+                                <input type="checkbox" onclick="ver_clave()">
+                                <script>
+                                    function ver_clave() {
+                                        var x = document.getElementById("contrasenia");
+                                        if (x.type === "password") {
+                                            x.type = "text";
+                                        } else {
+                                            x.type = "password";
+                                        }
+                                    }
+                                </script>
+                                <!--OJO VER CONTRA-->
+                                <svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="20"
+                                    height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path
+                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                </svg>
+                                <!--OJO VER CONTRA-->
                                 <input type="password" class="form-control borde_input" name="contrasenia"
                                     id="contrasenia">
                             </div>
                             <!--Ingresar Confirmar Contraseña-->
                             <div class="form-group">
                                 <label class="texto_datos" for="contrasenia2">Confirmar Contraseña</label>
+                                <input type="checkbox" onclick="ver_clave1()">
+                                <script>
+                                    function ver_clave1() {
+                                        var x = document.getElementById("contrasenia2");
+                                        if (x.type === "password") {
+                                            x.type = "text";
+                                        } else {
+                                            x.type = "password";
+                                        }
+                                    }
+                                </script>
+                                <!--OJO VER CONTRA-->
+                                <svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="20"
+                                    height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path
+                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                </svg>
+                                <!--OJO VER CONTRA-->
                                 <input type="password" class="form-control borde_input" name="contrasenia2"
                                     id="contrasenia2">
                             </div>
@@ -233,7 +271,8 @@
 
                             <div class="form-group">
                                 <label for="">Seleccione su Comuna</label>
-                                <select id="comunas" name="comunas" class="form-control" style="border: black solid 1px;">
+                                <select id="comunas" name="comunas" class="form-control"
+                                    style="border: black solid 1px;">
                                     <option value="0">Seleccione una Comuna</option>
                                     {% for c in comuna %}
                                     <option value="{{ c.idComuna }}">{{ c.nombreComuna }}</option>

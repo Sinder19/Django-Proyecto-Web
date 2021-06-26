@@ -131,7 +131,7 @@ def Ingresar_usuario(request):
         opcionDespacho = 2
     
     Usuario.objects.create(rutUsu = rut, nombreUsu = nombre, apellidoUsu = apellido, correoUsu = correo, contrasenaUsu = contrasenia, telefonoUsu = telefono, tipousuario = tipoUsu)
-    User.objects.create_user(id = int(rut), username = correo, password = contrasenia, first_name = nombre, last_name = apellido, email = correo, is_staff = 0)
+    User.objects.create_user(id = int(rut), username = correo, password = contrasenia, first_name = nombre, last_name = apellido, email = correo, is_staff = 1, is_superuser = 0)
 
     usu = Usuario.objects.get(rutUsu = rut)
     Direccion.objects.create(descripcion = direccion, numDic =num_direc, blockDpto = block, numDpto = num_dpto, direccionDespacho = opcionDespacho, comuna = com, usuario = usu)
@@ -203,6 +203,8 @@ def Modificar(request):
     if producto.tipoproducto != tipo_prod2:
         producto.tipoproducto = tipo_prod2
     
+    if foto is not None:
+        producto.fotoProd = foto
 
     producto.save()
     messages.success(request, 'Producto Modificado')
@@ -262,7 +264,6 @@ def Modificar_usuario(request):
     nombreUsu = request.POST['nombreUsu']
     apellidoUsu = request.POST['apellidoUsu']
     correoUsu = request.POST['correoUsu']
-    contrasenaUsu = request.POST['contrasenaUsu1']
     telefonoUsu = request.POST['telefonoUsu']
     tipousuario = request.POST['tipousuario']
 
@@ -281,18 +282,14 @@ def Modificar_usuario(request):
         usuario.correoUsu = correoUsu
         usu.email = correoUsu
 
-    if usuario.contrasenaUsu != contrasenaUsu:
-        usuario.contrasenaUsu = contrasenaUsu
-        usu.password = make_password(contrasenaUsu)
-        
     if usuario.telefonoUsu != telefonoUsu:
         usuario.telefonoUsu = telefonoUsu
     
     tipousuario2 = TipoUsuario.objects.get(idTipoUsu = tipousuario)
     if tipousuario2.idTipoUsu == 1:
-        usu.is_staff = 1
+        usu.is_superuser = 1
     if tipousuario2.idTipoUsu == 2:
-        usu.is_staff = 0
+        usu.is_superuser = 0
     if usuario.tipousuario != tipousuario2:
         usuario.tipousuario = tipousuario2
     

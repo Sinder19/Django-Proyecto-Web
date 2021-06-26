@@ -57,7 +57,7 @@
                     <a class="nav-link color_letra padding_navbar"
                         href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
-                {% if user.is_authenticated and user.is_staff %}
+                {% if user.is_authenticated and user.is_superuser %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle item_select padding_navbar" href="#" id="navbardrop"
                         data-toggle="dropdown">
@@ -236,8 +236,7 @@
                             <h4>Actualizar Foto</h4>
                         </div>
                         <div class="col-md-8">
-                            <input type="file" name="foto"
-                                style="margin-bottom: 10px;" value="{{ producto.idProducto }}">
+                            <input type="file" name="fotoP" style="margin-bottom: 10px;">
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #E1E8EE;">

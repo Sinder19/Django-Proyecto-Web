@@ -79,7 +79,7 @@
                     <a class="nav-link color_letra padding_navbar"
                         href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
-                {% if user.is_authenticated and user.is_staff %}
+                {% if user.is_authenticated and user.is_superuser %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle padding_navbar color_letra2" href="#" id="navbardrop"
                         data-toggle="dropdown">
@@ -183,6 +183,25 @@
                 <div class="col-md-6">
                     <div class="form-group" style="margin-left: 10px;">
                         <label for="contrasenaUsu" style="font-size: 20px; margin-top: 10px;">Contraseña Usuario</label>
+                        <input type="checkbox" onclick="ver_clave()">
+                        <script>
+                            function ver_clave() {
+                              var x = document.getElementById("contrasenaUsu");
+                              if (x.type === "password") {
+                                x.type = "text";
+                              } else {
+                                x.type = "password";
+                              }
+                            }
+                            </script>
+                        <!--OJO VER CONTRA-->
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="20" height="20"
+                            fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                            <path
+                                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                        <!--OJO VER CONTRA-->
                         <input type="password" name="contrasenaUsu" id="contrasenaUsu" class="form-control"
                             value="{{ usuario.contrasenaUsu }}" style="margin-bottom: 10px;" required>
                     </div>
@@ -200,6 +219,25 @@
                     <div class="form-group" style="margin-left: 10px;">
                         <label for="contrasenaUsu1" style="font-size: 20px; margin-top: 10px;">Repetir Contraseña
                             Usuario</label>
+                            <input type="checkbox" onclick="ver_clave1()">
+                            <script>
+                                function ver_clave1() {
+                                  var x = document.getElementById("contrasenaUsu1");
+                                  if (x.type === "password") {
+                                    x.type = "text";
+                                  } else {
+                                    x.type = "password";
+                                  }
+                                }
+                                </script>
+                            <!--OJO VER CONTRA-->
+                            <svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="20" height="20"
+                                fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                            </svg>
+                            <!--OJO VER CONTRA-->
                         <input type="password" name="contrasenaUsu1" id="contrasenaUsu1" class="form-control"
                             value="{{ usuario.contrasenaUsu }}" style="margin-bottom: 10px;" required>
                     </div>

@@ -57,7 +57,7 @@
                     <a class="nav-link color_letra padding_navbar"
                         href="{% url 'Contactanos_mensaje' %}">Contáctanos</a>
                 </li>
-                {% if user.is_authenticated and user.is_staff %}
+                {% if user.is_authenticated and user.is_superuser %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle padding_navbar color_letra2" href="#" id="navbardrop"
                         data-toggle="dropdown">

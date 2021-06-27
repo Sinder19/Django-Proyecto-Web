@@ -137,7 +137,7 @@ def Ingresar_usuario(request):
     Direccion.objects.create(descripcion = direccion, numDic =num_direc, blockDpto = block, numDpto = num_dpto, direccionDespacho = opcionDespacho, comuna = com, usuario = usu)
 
     messages.success(request, 'El Usuario Ha Sido Registrado Con Exito')
-    return redirect('Registrarse')
+    return redirect('Inicio_sesion')
 
 def Inicio_sesion(request):
     return render(request, 'AmonStore/inicio_sesion.html')
@@ -177,7 +177,7 @@ def Modificar(request):
     tipo_prod = request.POST['tipo_prod']
     talla = request.POST['talla']
     color = request.POST['color']
-    foto = request.FILES['foto']
+    foto = request.FILES['fotoP']
 
     producto = Producto.objects.get(idProducto = id)
     

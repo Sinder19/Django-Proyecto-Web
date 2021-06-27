@@ -59,13 +59,14 @@
                 </li>
                 {% if user.is_authenticated and user.is_superuser %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle padding_navbar color_letra2" href="#" id="navbardrop"
+                    <a class="nav-link dropdown-toggle color_letra padding_navbar" href="#" id="navbardrop"
                         data-toggle="dropdown">
                         Admin
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
                         <a class="dropdown-item" href="{% url 'Administrar_prod' %}">Administrar Productos</a>
+                        <a class="dropdown-item" href="{% url 'Administrar_usu' %}">Administrar Usuarios</a>
+                        <a class="dropdown-item" href="{% url 'Administrar_men' %}">Administrar Mensajes</a>
                     </div>
                 </li>
                 {% else %}

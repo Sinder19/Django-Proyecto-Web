@@ -53,6 +53,12 @@
                 if ($("#rut").val().trim().length == 0) {
                     mensaje = mensaje + "<br>El Rut o Pasaporte no debe estar vacío";
                 }
+                if ($("#rut").val().trim().length != 9 && $("#rut").val().trim().length != 8) {
+                    mensaje = mensaje + "<br>El Rut debe ser ingresado en el formato solicitado";
+                }
+                if (isNaN($("#rut").val())){
+                    mensaje = mensaje + "<br>El Rut solo deben ser números";
+                }
                 if ($("#nombre").val().trim().length == 0) {
                     mensaje = mensaje + "<br>El nombre no debe estar vacío";
                 }
@@ -74,11 +80,17 @@
                 if (isNaN($("#telefono").val())) {
                     mensaje = mensaje + "<br>El teléfono solo puede ser números";
                 }
+                if ($("#telefono").val().trim().length != 9){
+                    mensaje = mensaje + "<br>El teléfono debe contener 9 dígitos";
+                }
+                if ($("#telefono").val().trim().length == 8 || $("#telefono").val().trim().charAt(0) != '9'){
+                    mensaje = mensaje + "<br>Debe anteponer un 9 a su número de teléfono";
+                }
                 if ($("#regiones").val() == "0") {
-                    mensaje = mensaje + "<br>Debe seleccionar una región"
+                    mensaje = mensaje + "<br>Debe seleccionar una región";
                 }
                 if ($("#comunas").val() == "0") {
-                    mensaje = mensaje + "<br>Debe seleccionar una comuna"
+                    mensaje = mensaje + "<br>Debe seleccionar una comuna";
                 }
                 if ($("#direccion").val().trim().length == 0) {
                     mensaje = mensaje + "<br>La dirección no debe estar vacío";

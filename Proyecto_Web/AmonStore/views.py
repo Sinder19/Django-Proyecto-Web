@@ -177,7 +177,7 @@ def Modificar(request):
     tipo_prod = request.POST['tipo_prod']
     talla = request.POST['talla']
     color = request.POST['color']
-    foto = request.FILES['fotoP']
+    
 
     producto = Producto.objects.get(idProducto = id)
     
@@ -203,8 +203,8 @@ def Modificar(request):
     if producto.tipoproducto != tipo_prod2:
         producto.tipoproducto = tipo_prod2
     
-    if foto is not None:
-        producto.fotoProd = foto
+    if request.FILES.get('fotoP') is not None:
+        producto.fotoProd = request.FILES['fotoP']
 
     producto.save()
     messages.success(request, 'Producto Modificado')
@@ -221,11 +221,15 @@ def Agregar_producto(request):
     nombre = request.POST['nombre']
     precio = request.POST['precio']
     descripcion = request.POST['descripcion']
-    foto = request.FILES['foto']
     stock = request.POST['stock']
     tipoprod = request.POST['tipoproducto']
     talla = request.POST['talla']
     color = request.POST['color']
+
+    if request.FILES.get('fotoP') is None:
+        foto = 'productos/default.png'
+    else:
+        foto = request.FILES['foto']
 
     tipoproducto2 = TipoProducto.objects.get(idTipoProd = tipoprod)
 

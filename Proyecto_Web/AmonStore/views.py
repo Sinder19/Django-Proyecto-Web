@@ -1,13 +1,11 @@
 from django.contrib import messages
-from django.db.models import Sum, Count
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from .models import Direccion, Producto, Comuna, Region, TipoProducto, TipoUsuario, Usuario, Contactanos, Carrito, MensajeVisto
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout 
-
 from django.contrib.auth.hashers import make_password
 
-# Create your views here.
 def Home(request):
 
     return render(request, 'AmonStore/Home.html')
@@ -359,7 +357,7 @@ def Carrito_pantalon(request, id):
 
 def Ver_carrito(request):
     usuario2 = Usuario.objects.get(rutUsu = request.user.id)
-    carrito = Carrito.objects.filter(usuario = usuario2)
+    carrito = Carrito.objects.filter(usuario = usuario2).order_by('idCarrito')
     
     suma2 = Carrito.objects.filter(usuario = usuario2).count()
     

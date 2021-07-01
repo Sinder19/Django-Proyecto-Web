@@ -144,11 +144,11 @@
     <!--Inicio Listar Productos-->
     <div class="container fondo_carrito">
         <div class="row" style="margin-top: 30px; border-bottom: 1px solid #dee2e6;">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <h2 style="margin-top: 10px;">Mensajes Recibidos</h2>
             </div>
             {% if messages %}
-            <div>
+            <div class="col-md-12">
                 {% for i in messages %}
                 <p style="color: green; margin-left: 15px; font-size: 20px;">{{ i }}</p>
                 {% endfor %}

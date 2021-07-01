@@ -125,7 +125,6 @@
                 <table class="table">
                     <thead style="text-align: center;">
                         <tr>
-                            <th>#</th>
                             <th style="width: 170px;">Imagen</th>
                             <th>Nombre Producto</th>
                             <th>Cantidad</th>
@@ -137,7 +136,6 @@
                     <tbody style="text-align: center;">
                         {% for c in carrito %}
                         <tr>
-                            <td>{{ c.idCarrito }}</td>
                             <td><img src="{{ c.producto.fotoProd.url }}" alt="" style="width: 100%; max-width: 150px;">
                             </td>
                             <td>{{ c.producto.tipoproducto.descripcion }} {{ c.producto.nombreProd }}</td>

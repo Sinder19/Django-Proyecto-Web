@@ -226,7 +226,7 @@ def Agregar_producto(request):
     talla = request.POST['talla']
     color = request.POST['color']
 
-    if request.FILES.get('fotoP') is None:
+    if request.FILES.get('foto') is None:
         foto = 'productos/default.png'
     else:
         foto = request.FILES['foto']

@@ -244,7 +244,7 @@ def Administrar_usu(request):
 def Eliminar_usu(request, rut):
     usuarios = Usuario.objects.get(rutUsu = rut)
     usu = User.objects.get(id = rut)
-    usuarios.delete() #elimina el registro
+    usuarios.delete()
     usu.delete()
     messages.success(request,'Usuario Eliminado con Exito')
 

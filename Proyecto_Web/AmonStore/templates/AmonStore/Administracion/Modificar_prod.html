@@ -142,6 +142,7 @@
     </nav>
     <!--Fin Barra Menu-->
 
+    {% if user.is_superuser %}
     <!--Inicio Modificar Producto-->
     <div class="container" style="background-color: #fff; border-radius: 10px;">
         <form action="{% url 'Modificar' %}" method="POST" enctype="multipart/form-data">
@@ -249,7 +250,18 @@
         </form>
     </div>
     <!--Inicio Modificar Producto-->
-    .
+    {% else %}
+    <div class="container fondo_carrito" style="margin-top: 50px;">
+        <div class="row">
+            <div class="col-md-12" style="padding: 20px;">
+                <center>
+                    <h1>Usted no tiene el permiso para ingresar </h1>
+                    <h1>a este apartado</h1>
+                </center>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </body>
 
 </html>

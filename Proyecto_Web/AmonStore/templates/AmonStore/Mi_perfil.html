@@ -157,6 +157,19 @@
     </nav>
     <!--Fin Barra Menu-->
 
+    <!--MENSAJE-->
+    {% if messages %}
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-12" style="color: green; font-size: 20px; background-color: #fff; text-align: center; border-radius: 20px; margin-top: 20px;">
+                {% for i in messages %}
+                {{ i }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <!--Inicio Modificar Usuario-->
     <div class="container" style="background-color: #fff; border-radius: 10px;">
         <div class="row" style="margin-top: 30px; border-bottom: 1px solid #dee2e6;">
@@ -164,13 +177,6 @@
                 <h2 style="margin-top: 10px;">Modificar Usuario</h2>
             </div>
         </div>
-        {% if messages %}
-        <div>
-            {% for i in messages %}
-            <p style="color: green; margin-left: 15px; font-size: 20px;">{{ i }}</p>
-            {% endfor %}
-        </div>
-        {% endif %}
         <form action="{% url 'Modificar_usuario_Miperfil' %}" method="POST" name="modificar" id="modificar">
             {% csrf_token %}
             <div class="row">
@@ -187,14 +193,14 @@
                         <input type="checkbox" onclick="ver_clave()">
                         <script>
                             function ver_clave() {
-                              var x = document.getElementById("contrasenaUsu");
-                              if (x.type === "password") {
-                                x.type = "text";
-                              } else {
-                                x.type = "password";
-                              }
+                                var x = document.getElementById("contrasenaUsu");
+                                if (x.type === "password") {
+                                    x.type = "text";
+                                } else {
+                                    x.type = "password";
+                                }
                             }
-                            </script>
+                        </script>
                         <!--OJO VER CONTRA-->
                         <svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="20" height="20"
                             fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -220,25 +226,25 @@
                     <div class="form-group" style="margin-left: 10px;">
                         <label for="contrasenaUsu1" style="font-size: 20px; margin-top: 10px;">Repetir Contraseña
                             Usuario</label>
-                            <input type="checkbox" onclick="ver_clave1()">
-                            <script>
-                                function ver_clave1() {
-                                  var x = document.getElementById("contrasenaUsu1");
-                                  if (x.type === "password") {
+                        <input type="checkbox" onclick="ver_clave1()">
+                        <script>
+                            function ver_clave1() {
+                                var x = document.getElementById("contrasenaUsu1");
+                                if (x.type === "password") {
                                     x.type = "text";
-                                  } else {
+                                } else {
                                     x.type = "password";
-                                  }
                                 }
-                                </script>
-                            <!--OJO VER CONTRA-->
-                            <svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="20" height="20"
-                                fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                <path
-                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                            </svg>
-                            <!--OJO VER CONTRA-->
+                            }
+                        </script>
+                        <!--OJO VER CONTRA-->
+                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="20" height="20"
+                            fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                            <path
+                                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                        <!--OJO VER CONTRA-->
                         <input type="password" name="contrasenaUsu1" id="contrasenaUsu1" class="form-control"
                             value="{{ usuario.contrasenaUsu }}" style="margin-bottom: 10px;" required>
                     </div>
@@ -282,6 +288,90 @@
         </form>
     </div>
     <!--Fin Modificar Usuario-->
+
+    <!--Inicio Modificar Dirección-->
+    <div class="container" style="background-color: #fff; border-radius: 10px;">
+        <div class="row" style="margin-top: 30px; border-bottom: 1px solid #dee2e6;">
+            <div class="col-md-12">
+                <h2 style="margin-top: 10px;">Dirección Usuario</h2>
+            </div>
+        </div>
+        <form action="{% url 'Modificar_direccion' %}" method="POST" name="modificar_dic" id="modificar_dic">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="hidden" name="id" id="id" value="{{direccion.idDireccion}}">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="descripcion" style="font-size: 20px; margin-top: 10px;">Descripción</label>
+                        <input type="text" name="descripcion" id="descripcion" class="form-control"
+                            value="{{ direccion.descripcion }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="numDic" style="font-size: 20px; margin-top: 10px;">Número Dirección</label>
+                        <input type="number" name="numDic" id="numDic" class="form-control"
+                            value="{{ direccion.numDic }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+            </div>
+            {% if direccion.blockDpto == '' %}
+            <input type="hidden" name="blockDpto" id="blockDpto" class="form-control" value="{{ direccion.blockDpto }}"
+                style="margin-bottom: 10px;" required>
+            <input type="hidden" name="numDpto" id="numDpto" class="form-control" value="{{ direccion.numDpto }}"
+                style="margin-bottom: 10px;" required>
+            {% else %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="blockDpto" style="font-size: 20px; margin-top: 10px;">Block Departamento</label>
+                        <input type="text" name="blockDpto" id="blockDpto" class="form-control"
+                            value="{{ direccion.blockDpto }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="numDpto" style="font-size: 20px; margin-top: 10px;">Número Departamento</label>
+                        <input type="text" name="numDpto" id="numDpto" class="form-control"
+                            value="{{ direccion.numDpto }}" style="margin-bottom: 10px;" required>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="comuna" style="font-size: 20px; margin-top: 10px;">Comúna</label>
+                        <select name="comuna" id="comuna" class="form-control" style="margin-bottom: 10px;">
+                            {% for c in comuna %}
+                            {% if c.idComuna == direccion.comuna.idComuna %}
+                            <option value="{{ c.idComuna }}" selected>{{ c.nombreComuna }}</option>
+                            {% else %}
+                            <option value="{{ c.idComuna }}">{{ c.nombreComuna }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="margin-left: 10px;">
+                        <label for="region" style="font-size: 20px; margin-top: 10px;">Región</label>
+                        <input type="text" name="region" id="region" class="form-control"
+                            value="{{ direccion.comuna.region.nombreRegion}}" style="margin-bottom: 10px;" required
+                            readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px; padding-bottom: 10px;">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <p><button class="comprar">Modificar Dirección</button></p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </form>
+    </div>
+    <!--Fin Modificar Dirección-->
     .
 </body>
 

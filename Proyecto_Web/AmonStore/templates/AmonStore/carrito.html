@@ -159,26 +159,25 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
                             <td>TOTAL A PAGAR</td>
                             {% if x == 0 %}
                             <td>${{ suma }}</td>
                             {% else %}
                             <td>${{ suma.totalProd__sum }}</td>
                             {% endif %}
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6"></div>
-            <div class="col-md-6 fondo_carrito">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p><button class="pagar">Pagar</button></p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 fondo_carrito" style="margin-top: 0px !important;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p><a href="{% url 'Pagar' %}"><button class="pagar">Pagar</button></a></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

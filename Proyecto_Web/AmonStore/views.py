@@ -119,7 +119,6 @@ def Ingresar_usuario(request):
     block = request.POST['block']
     num_dpto = request.POST['num_depto']
     desp_dic = request.POST['desp_dic']
- 
     com = Comuna.objects.get(idComuna = comunaUsu)
     tipoUsu = TipoUsuario.objects.get(idTipoUsu = 2)
     
@@ -406,9 +405,13 @@ def logout_view(request):
     return redirect('Home')
 
 def Mi_perfil(request):
-    usuario = Usuario.objects.get(rutUsu = request.user.id)
+    usuario1 = Usuario.objects.get(rutUsu = request.user.id)
+    direccion = Direccion.objects.get(usuario = usuario1)
+    comuna = Comuna.objects.all()
     contexto = {
-        "usuario": usuario
+        "usuario": usuario1,
+        "direccion": direccion,
+        "comuna": comuna
     }
     return render(request, 'AmonStore/Mi_perfil.html', contexto)
 
@@ -450,3 +453,43 @@ def Modificar_usuario_Miperfil(request):
     usu.save()
     messages.success(request, mensaje)
     return redirect('Mi_perfil')
+
+def Modificar_direccion(request):
+    id = request.POST['id']
+    descripcion = request.POST['descripcion']
+    numDic = request.POST['numDic']
+    blockDpto = request.POST['blockDpto']
+    numDpto = request.POST['numDpto']
+    comuna = request.POST['comuna']
+
+    direccion = Direccion.objects.get(idDireccion = id)
+
+    if direccion.descripcion != descripcion:
+        direccion.descripcion = descripcion
+
+    if direccion.numDic != numDic:
+        direccion.numDic = numDic
+    
+    if direccion.blockDpto != blockDpto:
+        direccion.blockDpto = blockDpto
+
+    if direccion.numDpto != numDpto:
+        direccion.numDpto = numDpto
+
+    comuna2 = Comuna.objects.get(idComuna = comuna)
+
+    if direccion.comuna != comuna2:
+        direccion.comuna = comuna2
+
+    direccion.save()
+    messages.success(request, 'La Direccion Se Ha Modificado')
+    return redirect('Mi_perfil')
+
+def Gracias(request):
+    return render(request, 'AmonStore/gracias_compra.html')
+
+def Pagar(request):
+    usuario1 = Usuario.objects.get(rutUsu = request.user.id)
+    carrito = Carrito.objects.filter(usuario = usuario1)
+    carrito.delete()
+    return redirect('Gracias')

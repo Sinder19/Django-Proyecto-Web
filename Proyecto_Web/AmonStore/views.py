@@ -491,5 +491,11 @@ def Gracias(request):
 def Pagar(request):
     usuario1 = Usuario.objects.get(rutUsu = request.user.id)
     carrito = Carrito.objects.filter(usuario = usuario1)
+
+    for c in carrito:
+        prod = Producto.objects.get(idProducto = c.producto.idProducto)
+        prod.stockProd = prod.stockProd - c.cantidadProd
+        prod.save()
+
     carrito.delete()
     return redirect('Gracias')

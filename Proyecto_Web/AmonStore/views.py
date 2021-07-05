@@ -262,29 +262,10 @@ def Modificar_usu(request, rut):
 
 def Modificar_usuario(request):
     rutUsu = request.POST['rutUsu']
-    nombreUsu = request.POST['nombreUsu']
-    apellidoUsu = request.POST['apellidoUsu']
-    correoUsu = request.POST['correoUsu']
-    telefonoUsu = request.POST['telefonoUsu']
     tipousuario = request.POST['tipousuario']
 
     usuario = Usuario.objects.get(rutUsu = rutUsu)
     usu = User.objects.get(id = int(rutUsu))
-
-    if usuario.nombreUsu != nombreUsu:
-        usuario.nombreUsu = nombreUsu
-        usu.first_name = nombreUsu
-
-    if usuario.apellidoUsu != apellidoUsu:
-        usuario.apellidoUsu = apellidoUsu
-        usu.last_name = apellidoUsu
-
-    if usuario.correoUsu != correoUsu:
-        usuario.correoUsu = correoUsu
-        usu.email = correoUsu
-
-    if usuario.telefonoUsu != telefonoUsu:
-        usuario.telefonoUsu = telefonoUsu
     
     tipousuario2 = TipoUsuario.objects.get(idTipoUsu = tipousuario)
     if tipousuario2.idTipoUsu == 1:
